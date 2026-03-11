@@ -159,9 +159,12 @@
     .person-card.rep .name { color: #9b1c1c; }
 
     /* Add your name */
-    .add-name-wrap { margin-top: 1.5rem; }
-    .add-name-btn { display: inline-block; font-family: system-ui, sans-serif; font-size: .88rem; font-weight: 600; color: var(--green); border: 1.5px solid var(--green-light); border-radius: 999px; padding: .45rem 1.25rem; text-decoration: none; transition: background .15s, color .15s; }
-    .add-name-btn:hover { background: var(--green); color: #fff; }
+    .add-name-wrap { margin-top: 1.5rem; display: flex; justify-content: center; gap: .5rem; flex-wrap: wrap; }
+    .add-name-btn { display: inline-block; font-family: system-ui, sans-serif; font-size: .88rem; font-weight: 600; border-radius: 999px; padding: .45rem 1.25rem; text-decoration: none; transition: background .15s, color .15s; }
+    .add-name-btn.primary { background: var(--green); color: #fff; border: 1.5px solid var(--green); }
+    .add-name-btn.primary:hover { background: var(--green-light); border-color: var(--green-light); }
+    .add-name-btn.secondary { background: #fff; color: var(--green); border: 1.5px solid var(--green-light); }
+    .add-name-btn.secondary:hover { background: var(--green-pale); }
 
     /* Footer */
     footer { background: var(--green); color: #c8e6c0; text-align: center; padding: 2rem 1.5rem; font-size: .85rem; font-family: system-ui, sans-serif; }
@@ -237,19 +240,19 @@
       <div class="person-card"><div class="name">Tony Cadena</div><div class="role">Ward 9 Councilor</div></div>
       <div class="person-card nonpartisan" style="background:#e8f5e9;border-color:#a5d6a7;"><div class="name" style="color:#2e7d32;">Pacific Green Party</div><div class="role" style="color:#388e3c;">Linn/Benton County Chapter</div></div>
     </div>
-    <div class="add-name-wrap">
-<a class="add-name-btn" href="mailto:endorse@corvallischarter.info?subject=Endorsement%20%E2%80%94%20Corvallis%20Charter%20Measures%202026&body=I%20would%20like%20to%20add%20my%20name%20as%20an%20endorser.%20Please%20find%20attached%20four%20completed%20SEL-400%20(Measure%20Argument)%20forms%2C%20one%20per%20measure%3A%0A%0A%20%20Measure%202-143%20%E2%80%94%20Filer%3A%20YES%20on%202-143%20by%20Corvallis%20Good%20Governance%20PAC%20(ID%3A%2024834)%0A%20%20Measure%202-144%20%E2%80%94%20Filer%3A%20YES%20on%202-144%20by%20Corvallis%20Good%20Governance%20PAC%20(ID%3A%2024834)%0A%20%20Measure%202-145%20%E2%80%94%20Filer%3A%20YES%20on%202-145%20by%20Corvallis%20Good%20Governance%20PAC%20(ID%3A%2024834)%0A%20%20Measure%202-146%20%E2%80%94%20Filer%3A%20YES%20on%202-146%20by%20Corvallis%20Good%20Governance%20PAC%20(ID%3A%2024834)">+ Add your name</a>
-    </div>
+    <div class="add-name-wrap" id="endorse-buttons"></div>
   </div>
 </main>
 
 <footer>
-  <a href="https://www.corvallisoregon.gov/cm/page/corvallis-charter-amendments-frequently-asked-questions">FAQ</a> &bull;
-  <a href="https://www.corvallisoregon.gov/cm/page/may-2026-election-ballot-measures">Official Ballot Measures</a> &bull;
-  <a href="https://www.corvallisoregon.gov/cm/page/city-charter">Current City Charter</a> &bull;
-  <a href="https://archives.corvallisoregon.gov/public/ElectronicFile.aspx?dbid=0&docid=5717604">Task Force Report (PDF)</a>
+  <a href="https://www.corvallisoregon.gov/cm/page/may-2026-election-ballot-measures" target="_blank" rel="noopener">Official Ballot Measures</a> &bull;
+  <a href="https://www.corvallisoregon.gov/cm/page/city-charter" target="_blank" rel="noopener">Current City Charter</a> &bull;
+  <a href="https://archives.corvallisoregon.gov/public/ElectronicFile.aspx?dbid=0&docid=5717604" target="_blank" rel="noopener">Task Force Report (PDF)</a>
+  <br>
+  <a href="https://www.corvallisoregon.gov/cm/page/corvallis-charter-amendments-frequently-asked-questions" target="_blank" rel="noopener">FAQ</a> &bull;
+  <a href="/sel400.pdf" target="_blank" rel="noopener">SEL-400 Template</a>
   <br><br>
-  <span style="opacity:.65;">Paid for by Corvallis Good Governance PAC (ID: 24834)</span>
+  <span style="opacity:.65;">Paid for by Good Governance Corvallis (#24834)</span>
 </footer>
 
 <script>
@@ -477,6 +480,25 @@ const MEASURES = [
     ],
   },
 ];
+
+// ── Endorse email ────────────────────────────────────────────────
+const EMAIL_TO = 'endorse@corvallischarter.info';
+
+const EMAIL_SUBJECT = 'Endorsement — Corvallis Charter Measures 2026';
+
+const EMAIL_BODY = `\
+I would like to add my, or my organization's, name as an endorser. Please find \
+attached FOUR completed SEL-400 (Measure Argument) forms, one per measure, which \
+I have filled out using the template at https://corvallischarter.info/sel400.pdf`;
+
+const mailtoHref =
+  `mailto:${EMAIL_TO}` +
+  `?subject=${encodeURIComponent(EMAIL_SUBJECT)}` +
+  `&body=${encodeURIComponent(EMAIL_BODY)}`;
+
+document.getElementById('endorse-buttons').innerHTML = `
+  <a class="add-name-btn primary" href="${mailtoHref}">+ Add your name</a>
+  <a class="add-name-btn secondary" href="/sel400.pdf" target="_blank" rel="noopener">SEL-400</a>`;
 
 // ── Render ───────────────────────────────────────────────────────
 function renderSectionRow(m, s, idx) {
