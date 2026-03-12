@@ -6,15 +6,30 @@
   <title>Vote Yes — Corvallis Charter Measures, May 2026</title>
   <style>
     :root {
-      --green: #2d6a4f;
-      --green-light: #40916c;
-      --green-pale: #d8f3dc;
-      --accent: #f4a261;
+      /* Corvallis Visual Identity Color Palette */
+      --color-marionberry:     #AC395A;
+      --color-autumn:          #CA6534;
+      --color-rye-grass:       #668343;
+      --color-oak-leaf:        #415526;
+      --color-light-orange:    #F79228;
+      --color-honey:           #FBB342;
+      --color-lightest-orange: #FFDAA4;
+      --color-light-green:     #B1C58F;
+      --color-lightest-green:  #EDF3D3;
+      --color-light-pink:      #F5A4BD;
+      --color-lightest-pink:   #FCDBDC;
+
+      /* Semantic tokens */
+      --green:       var(--color-oak-leaf);      /* #415526 — dark headers, badges, footer */
+      --green-light: var(--color-rye-grass);     /* #668343 — labels, links, tab active */
+      --green-pale:  var(--color-lightest-green);/* #EDF3D3 — tinted backgrounds */
+      --accent:      var(--color-autumn);        /* #CA6534 — primary CTA / highlights */
+      --accent-dark: #a84e24;                    /* darker autumn for hover */
       --text: #1b1b1b;
       --muted: #666;
       --bg: #f9f9f7;
       --card: #ffffff;
-      --border: #dde5db;
+      --border: var(--color-light-green);        /* #B1C58F */
       --radius: 10px;
       --del-bg: #fff0f0;
       --del-text: #b91c1c;
@@ -24,16 +39,16 @@
       --ins-border: #6ee7b7;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Georgia, serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+    body { font-family: Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
 
     /* Hero */
-    header { background: var(--green); color: #fff; text-align: center; padding: 3.5rem 1.5rem 3rem; }
-    .eyebrow { font-family: system-ui, sans-serif; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .8; margin-bottom: .75rem; }
+    header { background: var(--color-autumn); color: #fff; text-align: center; padding: 3.5rem 1.5rem 3rem; }
+    .eyebrow { font-family: Arial, sans-serif; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .8; margin-bottom: .75rem; }
     header h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; }
-    header h1 span { color: var(--accent); }
+    header h1 span { color: #fff; white-space: nowrap; }
     .lead { max-width: 640px; margin: 0 auto 1.75rem; font-size: 1.1rem; opacity: .92; }
-    .btn { display: inline-block; background: var(--accent); color: #fff; font-family: system-ui, sans-serif; font-weight: 700; font-size: 1rem; padding: .75rem 2rem; border-radius: 999px; text-decoration: none; }
-    .btn:hover { background: #e08e4f; }
+    .btn { display: inline-block; background: var(--color-oak-leaf); color: #fff; font-family: Arial, sans-serif; font-weight: 700; font-size: 1rem; padding: .75rem 2rem; border-radius: 999px; text-decoration: none; }
+    .btn:hover { background: var(--color-rye-grass); }
 
     /* Intro */
     .intro { background: var(--green-pale); border-bottom: 1px solid var(--border); text-align: center; padding: 2rem 1.5rem; }
@@ -42,17 +57,17 @@
 
     /* Layout */
     main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
-    .section-heading { font-family: system-ui, sans-serif; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; color: var(--green-light); margin-bottom: 1.25rem; }
+    .section-heading { font-family: Arial, sans-serif; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; color: var(--green-light); margin-bottom: 1.25rem; }
 
     /* Measure cards */
     .measures { display: flex; flex-direction: column; gap: 1.25rem; }
     .measure-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 
     .measure-header { display: flex; align-items: flex-start; gap: 1rem; padding: 1.4rem 1.5rem; cursor: pointer; user-select: none; }
-    .measure-header:hover { background: #f3f8f3; }
-    .badge { flex-shrink: 0; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--green); color: #fff; font-family: system-ui, sans-serif; font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; }
+    .measure-header:hover { background: var(--green-pale); }
+    .badge { flex-shrink: 0; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--green); color: #fff; font-family: Arial, sans-serif; font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; }
     .measure-meta { flex: 1; }
-    .measure-number { font-family: system-ui, sans-serif; font-size: .78rem; font-weight: 600; color: var(--green-light); letter-spacing: .04em; margin-bottom: .3rem; }
+    .measure-number { font-family: Arial, sans-serif; font-size: .78rem; font-weight: 600; color: var(--green-light); letter-spacing: .04em; margin-bottom: .3rem; }
     .measure-number a { color: var(--green-light); }
     .measure-meta h3 { font-size: 1.15rem; font-weight: 700; line-height: 1.25; margin-bottom: .3rem; }
     .question { font-size: .93rem; color: var(--muted); font-style: italic; }
@@ -64,7 +79,7 @@
     .measure-detail { display: none; border-top: 1px solid var(--border); }
     .measure-card.open .measure-detail { display: block; }
     .detail-inner { padding: 1.25rem 1.5rem 1.5rem; background: #fafcfa; }
-    .detail-intro { font-family: system-ui, sans-serif; font-size: .82rem; color: var(--muted); margin-bottom: 1rem; }
+    .detail-intro { font-family: Arial, sans-serif; font-size: .82rem; color: var(--muted); margin-bottom: 1rem; }
     .detail-intro span { display: inline-block; padding: .1rem .45rem; border-radius: 3px; font-size: .78rem; font-weight: 600; margin-right: .3rem; }
     .legend-del { background: var(--del-bg); color: var(--del-text); border: 1px solid var(--del-border); }
     .legend-ins { background: var(--ins-bg); color: var(--ins-text); border: 1px solid var(--ins-border); }
@@ -79,14 +94,14 @@
       padding: .65rem 1rem; cursor: pointer; user-select: none;
       background: #fff; transition: background .1s;
     }
-    .section-row-header:hover { background: #f5faf6; }
-    .section-row.open .section-row-header { background: #edf7f0; }
+    .section-row-header:hover { background: var(--green-pale); }
+    .section-row.open .section-row-header { background: var(--color-lightest-green); }
 
-    .sec-num { font-family: system-ui, sans-serif; font-size: .8rem; font-weight: 700; color: var(--green); min-width: 2.5rem; }
-    .sec-title { font-family: system-ui, sans-serif; font-size: .88rem; flex: 1; color: var(--text); }
-    .sec-charter-link { font-family: system-ui, sans-serif; font-size: .75rem; color: var(--green-light); text-decoration: none; white-space: nowrap; }
+    .sec-num { font-family: Arial, sans-serif; font-size: .8rem; font-weight: 700; color: var(--green); min-width: 2.5rem; }
+    .sec-title { font-family: Arial, sans-serif; font-size: .88rem; flex: 1; color: var(--text); }
+    .sec-charter-link { font-family: Arial, sans-serif; font-size: .75rem; color: var(--green-light); text-decoration: none; white-space: nowrap; }
     .sec-charter-link:hover { text-decoration: underline; }
-    .sec-kind { font-family: system-ui, sans-serif; font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: 999px; white-space: nowrap; }
+    .sec-kind { font-family: Arial, sans-serif; font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: 999px; white-space: nowrap; }
     .sec-kind.amend { background: #e8f4fd; color: #1d6fa4; }
     .sec-kind.remove { background: var(--del-bg); color: var(--del-text); }
     .sec-chevron { font-size: .9rem; color: var(--muted); transition: transform .2s; flex-shrink: 0; }
@@ -96,8 +111,8 @@
     .section-diff { display: none; border-top: 1px solid var(--border); background: #fff; }
     .section-row.open .section-diff { display: block; }
 
-    .diff-view-tabs { display: flex; gap: 4px; padding: .6rem 1rem; background: #f7fbf8; border-bottom: 1px solid var(--border); }
-    .diff-tab { font-family: system-ui, sans-serif; font-size: .75rem; font-weight: 600; padding: .25rem .65rem; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; background: #fff; color: var(--muted); }
+    .diff-view-tabs { display: flex; gap: 4px; padding: .6rem 1rem; background: var(--green-pale); border-bottom: 1px solid var(--border); }
+    .diff-tab { font-family: Arial, sans-serif; font-size: .75rem; font-weight: 600; padding: .25rem .65rem; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; background: #fff; color: var(--muted); }
     .diff-tab.active { background: var(--green); color: #fff; border-color: var(--green); }
 
     .diff-content { padding: 1rem; font-size: .875rem; line-height: 1.8; font-family: 'Courier New', monospace; white-space: pre-wrap; word-break: break-word; }
@@ -120,7 +135,7 @@
       font-family: 'Courier New', monospace; white-space: pre-wrap; word-break: break-word;
     }
     .block-label {
-      font-family: system-ui, sans-serif; font-size: .7rem; font-weight: 700;
+      font-family: Arial, sans-serif; font-size: .7rem; font-weight: 700;
       letter-spacing: .06em; text-transform: uppercase; opacity: .6;
       margin-bottom: .3rem;
     }
@@ -133,7 +148,7 @@
       color: var(--del-text); text-decoration: line-through;
     }
     .remove-reason {
-      font-family: system-ui, sans-serif; font-size: .8rem; color: var(--muted);
+      font-family: Arial, sans-serif; font-size: .8rem; color: var(--muted);
       font-style: italic; padding: .5rem 1rem .75rem;
     }
 
@@ -141,7 +156,7 @@
     .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.2rem; margin-top: 1.25rem; }
     .why-item { background: var(--green-pale); border-radius: var(--radius); padding: 1rem 1.1rem; }
     .why-item .icon { font-size: 1.6rem; margin-bottom: .5rem; }
-    .why-item h3 { font-family: system-ui, sans-serif; font-size: .95rem; font-weight: 700; margin-bottom: .35rem; }
+    .why-item h3 { font-family: Arial, sans-serif; font-size: .95rem; font-weight: 700; margin-bottom: .35rem; }
     .why-item p { font-size: .88rem; color: var(--muted); }
 
     /* Shared people-grid used by both task force and endorsements */
@@ -160,15 +175,15 @@
 
     /* Add your name */
     .add-name-wrap { margin-top: 1.5rem; display: flex; justify-content: center; gap: .5rem; flex-wrap: wrap; }
-    .add-name-btn { display: inline-block; font-family: system-ui, sans-serif; font-size: .88rem; font-weight: 600; border-radius: 999px; padding: .45rem 1.25rem; text-decoration: none; transition: background .15s, color .15s; }
+    .add-name-btn { display: inline-block; font-family: Arial, sans-serif; font-size: .88rem; font-weight: 600; border-radius: 999px; padding: .45rem 1.25rem; text-decoration: none; transition: background .15s, color .15s; }
     .add-name-btn.primary { background: var(--green); color: #fff; border: 1.5px solid var(--green); }
     .add-name-btn.primary:hover { background: var(--green-light); border-color: var(--green-light); }
     .add-name-btn.secondary { background: #fff; color: var(--green); border: 1.5px solid var(--green-light); }
     .add-name-btn.secondary:hover { background: var(--green-pale); }
 
     /* Footer */
-    footer { background: var(--green); color: #c8e6c0; text-align: center; padding: 2rem 1.5rem; font-size: .85rem; font-family: system-ui, sans-serif; }
-    footer a { color: #c8e6c0; text-decoration: underline; }
+    footer { background: var(--green); color: var(--color-light-green); text-align: center; padding: 2rem 1.5rem; font-size: .85rem; font-family: Arial, sans-serif; }
+    footer a { color: var(--color-light-green); text-decoration: underline; }
     footer strong { color: #fff; }
   </style>
 </head>
@@ -176,7 +191,7 @@
 
 <header>
   <p class="eyebrow">City of Corvallis &bull; May 19, 2026 Ballot</p>
-  <h1>Update Our Charter.<br><span>Vote Yes on All Four Measures.</span></h1>
+  <h1>Vote YES on Measures<br><span>2&#8209;143, 2&#8209;144, 2&#8209;145, 2&#8209;146</span></h1>
   <p class="lead">Four straightforward amendments to modernize Corvallis's 1948 City Charter —
     unanimously recommended by a nonpartisan task force and unanimously referred by City Council.</p>
   <a href="#measures" class="btn">Learn About the Measures</a>
