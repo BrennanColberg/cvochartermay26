@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vote Yes — Corvallis Charter Measures, May 2026</title>
+  <style>
+    :root {
+      /* Corvallis Visual Identity Color Palette */
+      --color-marionberry:     #AC395A;
+      --color-autumn:          #CA6534;
+      --color-rye-grass:       #668343;
+      --color-oak-leaf:        #415526;
+      --color-light-orange:    #F79228;
+      --color-honey:           #FBB342;
+      --color-lightest-orange: #FFDAA4;
+      --color-light-green:     #B1C58F;
+      --color-lightest-green:  #EDF3D3;
+      --color-light-pink:      #F5A4BD;
+      --color-lightest-pink:   #FCDBDC;
+
+      /* Semantic tokens */
+      --green:       var(--color-oak-leaf);      /* #415526 — dark headers, badges, footer */
+      --green-light: var(--color-rye-grass);     /* #668343 — labels, links, tab active */
+      --green-pale:  var(--color-lightest-green);/* #EDF3D3 — tinted backgrounds */
+      --accent:      var(--color-autumn);        /* #CA6534 — primary CTA / highlights */
+      --accent-dark: #a84e24;                    /* darker autumn for hover */
+      --text: #1b1b1b;
+      --muted: #666;
+      --bg: #f9f9f7;
+      --card: #ffffff;
+      --border: var(--color-light-green);        /* #B1C58F */
+      --radius: 10px;
+      --del-bg: #fff0f0;
+      --del-text: #b91c1c;
+      --del-border: #fca5a5;
+      --ins-bg: #f0fff4;
+      --ins-text: #065f46;
+      --ins-border: #6ee7b7;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
+    /* Hero */
+    header { background: var(--color-autumn); color: #fff; text-align: center; padding: 3.5rem 1.5rem 3rem; }
+    .eyebrow { font-family: Arial, sans-serif; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .8; margin-bottom: .75rem; }
+    header h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; }
+    header h1 span { color: #fff; white-space: nowrap; }
+    .lead { max-width: 640px; margin: 0 auto 1.75rem; font-size: 1.1rem; opacity: .92; }
+    .btn { display: inline-block; background: var(--color-oak-leaf); color: #fff; font-family: Arial, sans-serif; font-weight: 700; font-size: 1rem; padding: .75rem 2rem; border-radius: 999px; text-decoration: none; }
+    .btn:hover { background: var(--color-rye-grass); }
+
+    /* Intro */
+    .intro { background: var(--green-pale); border-bottom: 1px solid var(--border); text-align: center; padding: 2rem 1.5rem; }
+    .intro p { max-width: 700px; margin: 0 auto; font-size: 1.05rem; color: var(--green); }
+    .intro a { color: var(--green); font-weight: 700; }
+
+    /* Layout */
+    main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+    .section-heading { font-family: Arial, sans-serif; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; color: var(--green-light); margin-bottom: 1.25rem; }
+
+    /* Measure cards */
+    .measures { display: flex; flex-direction: column; gap: 1.25rem; }
+    .measure-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+
+    .measure-header { display: flex; align-items: flex-start; gap: 1rem; padding: 1.4rem 1.5rem; cursor: pointer; user-select: none; }
+    .measure-header:hover { background: var(--green-pale); }
+    .badge { flex-shrink: 0; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--green); color: #fff; font-family: Arial, sans-serif; font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; }
+    .measure-meta { flex: 1; }
+    .measure-number { font-family: Arial, sans-serif; font-size: .78rem; font-weight: 600; color: var(--green-light); letter-spacing: .04em; margin-bottom: .3rem; }
+    .measure-number a { color: var(--green-light); }
+    .measure-meta h3 { font-size: 1.15rem; font-weight: 700; line-height: 1.25; margin-bottom: .3rem; }
+    .question { font-size: .93rem; color: var(--muted); font-style: italic; }
+    .chevron { flex-shrink: 0; font-size: 1.2rem; color: var(--green-light); margin-top: .25rem; transition: transform .2s; }
+    .measure-card.open .chevron { transform: rotate(180deg); }
+    .measure-summary { padding: 0 1.5rem 1.4rem 4.1rem; font-size: .97rem; color: var(--muted); }
+
+    /* Measure detail */
+    .measure-detail { display: none; border-top: 1px solid var(--border); }
+    .measure-card.open .measure-detail { display: block; }
+    .detail-inner { padding: 1.25rem 1.5rem 1.5rem; background: #fafcfa; }
+    .detail-intro { font-family: Arial, sans-serif; font-size: .82rem; color: var(--muted); margin-bottom: 1rem; }
+    .detail-intro span { display: inline-block; padding: .1rem .45rem; border-radius: 3px; font-size: .78rem; font-weight: 600; margin-right: .3rem; }
+    .legend-del { background: var(--del-bg); color: var(--del-text); border: 1px solid var(--del-border); }
+    .legend-ins { background: var(--ins-bg); color: var(--ins-text); border: 1px solid var(--ins-border); }
+
+    /* Section rows */
+    .section-list { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .section-row { border-bottom: 1px solid var(--border); }
+    .section-row:last-child { border-bottom: none; }
+
+    .section-row-header {
+      display: flex; align-items: center; gap: .75rem;
+      padding: .65rem 1rem; cursor: pointer; user-select: none;
+      background: #fff; transition: background .1s;
+    }
+    .section-row-header:hover { background: var(--green-pale); }
+    .section-row.open .section-row-header { background: var(--color-lightest-green); }
+
+    .sec-num { font-family: Arial, sans-serif; font-size: .8rem; font-weight: 700; color: var(--green); min-width: 2.5rem; }
+    .sec-title { font-family: Arial, sans-serif; font-size: .88rem; flex: 1; color: var(--text); }
+    .sec-charter-link { font-family: Arial, sans-serif; font-size: .75rem; color: var(--green-light); text-decoration: none; white-space: nowrap; }
+    .sec-charter-link:hover { text-decoration: underline; }
+    .sec-kind { font-family: Arial, sans-serif; font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: 999px; white-space: nowrap; }
+    .sec-kind.amend { background: #e8f4fd; color: #1d6fa4; }
+    .sec-kind.remove { background: var(--del-bg); color: var(--del-text); }
+    .sec-chevron { font-size: .9rem; color: var(--muted); transition: transform .2s; flex-shrink: 0; }
+    .section-row.open .sec-chevron { transform: rotate(180deg); }
+
+    /* Diff panel */
+    .section-diff { display: none; border-top: 1px solid var(--border); background: #fff; }
+    .section-row.open .section-diff { display: block; }
+
+    .diff-view-tabs { display: flex; gap: 4px; padding: .6rem 1rem; background: var(--green-pale); border-bottom: 1px solid var(--border); }
+    .diff-tab { font-family: Arial, sans-serif; font-size: .75rem; font-weight: 600; padding: .25rem .65rem; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; background: #fff; color: var(--muted); }
+    .diff-tab.active { background: var(--green); color: #fff; border-color: var(--green); }
+
+    .diff-content { padding: 1rem; font-size: .875rem; line-height: 1.8; font-family: 'Courier New', monospace; white-space: pre-wrap; word-break: break-word; }
+
+    /* Word-level diff tokens */
+    del.w { background: var(--del-bg); color: var(--del-text); text-decoration: line-through; border-radius: 2px; padding: 0 1px; }
+    ins.w { background: var(--ins-bg); color: var(--ins-text); text-decoration: none; border-radius: 2px; padding: 0 1px; }
+
+    /* Block-level diff */
+    .block-del {
+      background: var(--del-bg); border-left: 3px solid var(--del-border);
+      padding: .65rem .9rem; margin-bottom: .5rem; border-radius: 0 4px 4px 0;
+      color: var(--del-text); font-size: .875rem; line-height: 1.75;
+      font-family: 'Courier New', monospace; white-space: pre-wrap; word-break: break-word;
+    }
+    .block-ins {
+      background: var(--ins-bg); border-left: 3px solid var(--ins-border);
+      padding: .65rem .9rem; border-radius: 0 4px 4px 0;
+      color: var(--ins-text); font-size: .875rem; line-height: 1.75;
+      font-family: 'Courier New', monospace; white-space: pre-wrap; word-break: break-word;
+    }
+    .block-label {
+      font-family: Arial, sans-serif; font-size: .7rem; font-weight: 700;
+      letter-spacing: .06em; text-transform: uppercase; opacity: .6;
+      margin-bottom: .3rem;
+    }
+
+    /* Removed section */
+    .removed-block {
+      background: var(--del-bg); border-left: 3px solid var(--del-border);
+      padding: .75rem 1rem; font-family: 'Courier New', monospace;
+      font-size: .875rem; line-height: 1.75; white-space: pre-wrap; word-break: break-word;
+      color: var(--del-text); text-decoration: line-through;
+    }
+    .remove-reason {
+      font-family: Arial, sans-serif; font-size: .8rem; color: var(--muted);
+      font-style: italic; padding: .5rem 1rem .75rem;
+    }
+
+    /* Why section */
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.2rem; margin-top: 1.25rem; }
+    .why-item { background: var(--green-pale); border-radius: var(--radius); padding: 1rem 1.1rem; }
+    .why-item .icon { font-size: 1.6rem; margin-bottom: .5rem; }
+    .why-item h3 { font-family: Arial, sans-serif; font-size: .95rem; font-weight: 700; margin-bottom: .35rem; }
+    .why-item p { font-size: .88rem; color: var(--muted); }
+
+    /* Shared people-grid used by both task force and endorsements */
+    .people-section { padding: 2rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); text-align: center; }
+    .people-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: .65rem; margin-top: 1.25rem; }
+    .person-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: .75rem 1.1rem; font-size: .9rem; min-width: 150px; }
+    .person-card .name { font-weight: 700; }
+    .person-card .role { color: var(--muted); font-size: .8rem; }
+    /* org card variants */
+    .person-card.nonpartisan { background: #f3f3f3; border-color: #ccc; }
+    .person-card.nonpartisan .name { color: #444; }
+    .person-card.dem { background: #ddeeff; border-color: #9bbede; }
+    .person-card.dem .name { color: #1a4f8a; }
+    .person-card.rep { background: #fde8e8; border-color: #f0a0a0; }
+    .person-card.rep .name { color: #9b1c1c; }
+
+    /* Add your name */
+    .add-name-wrap { margin-top: 1.5rem; display: flex; justify-content: center; gap: .5rem; flex-wrap: wrap; }
+    .add-name-btn { display: inline-block; font-family: Arial, sans-serif; font-size: .88rem; font-weight: 600; border-radius: 999px; padding: .45rem 1.25rem; text-decoration: none; transition: background .15s, color .15s; }
+    .add-name-btn.primary { background: var(--green); color: #fff; border: 1.5px solid var(--green); }
+    .add-name-btn.primary:hover { background: var(--green-light); border-color: var(--green-light); }
+    .add-name-btn.secondary { background: #fff; color: var(--green); border: 1.5px solid var(--green-light); }
+    .add-name-btn.secondary:hover { background: var(--green-pale); }
+
+    /* Footer */
+    footer { background: var(--green); color: var(--color-light-green); text-align: center; padding: 2rem 1.5rem; font-size: .85rem; font-family: Arial, sans-serif; }
+    footer a { color: var(--color-light-green); text-decoration: underline; }
+    footer strong { color: #fff; }
+  </style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">City of Corvallis &bull; May 19, 2026 Ballot</p>
+  <h1>Vote YES on Measures<br><span>2&#8209;143, 2&#8209;144, 2&#8209;145, 2&#8209;146</span></h1>
+  <p class="lead">Four straightforward amendments to modernize Corvallis's 1948 City Charter —
+    unanimously recommended by a nonpartisan task force and unanimously referred by City Council.</p>
+  <a href="#measures" class="btn">Learn About the Measures</a>
+</header>
+
+<div class="intro">
+  <p>The <a href="https://www.corvallisoregon.gov/cm/page/city-charter">Corvallis City Charter</a> is our community's governing constitution — originally adopted in 1948, last amended in 2021.
+    After months of careful study, the <strong>Charter Review Task Force</strong> unanimously recommended these four updates.
+    The City Council voted unanimously to put them on your ballot.</p>
+</div>
+
+<main>
+  <h2 class="section-heading" id="measures">The Four Measures</h2>
+  <div class="measures" id="measures-container"></div>
+
+  <!-- Task Force — no box -->
+  <div style="margin-top:3rem; text-align:center;">
+    <h2 class="section-heading">Charter Review Task Force</h2>
+    <p style="font-size:.95rem; color:var(--muted); margin-bottom:0;">These seven individuals unanimously recommended all four measures after months of careful study. The full City Council unanimously referred them to voters.</p>
+    <div class="people-grid">
+      <div class="person-card"><div class="name">Charles Maughan</div><div class="role">Mayor (Chair)</div></div>
+      <div class="person-card"><div class="name">Tony Cadena</div><div class="role">Ward 9 Councilor</div></div>
+      <div class="person-card"><div class="name">Charlyn Ellis</div><div class="role">Ward 5 Councilor</div></div>
+      <div class="person-card"><div class="name">Jim Moorefield</div><div class="role">Ward 3 Councilor</div></div>
+      <div class="person-card"><div class="name">Hyatt Lytle</div><div class="role">Community Member</div></div>
+      <div class="person-card"><div class="name">Jack Sattler</div><div class="role">Community Member</div></div>
+      <div class="person-card"><div class="name">Curtis Wright</div><div class="role">Community Member</div></div>
+    </div>
+  </div>
+
+  <!-- Why Vote Yes — boxed -->
+  <div style="margin-top:2.5rem; padding:2rem; background:var(--card); border:1px solid var(--border); border-radius:var(--radius);">
+    <h2 class="section-heading">Why Vote Yes on All Four</h2>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="icon">🏛️</div>
+        <h3>Modernizes a 1948 document</h3>
+        <p>Much of the charter dates to 1948. These updates bring language and procedures into the 21st century.</p>
+      </div>
+      <div class="why-item">
+        <div class="icon">⚖️</div>
+        <h3>Aligns with state law</h3>
+        <p>Removes provisions that duplicate or conflict with Oregon state law, reducing legal risk for the city.</p>
+      </div>
+      <div class="why-item">
+        <div class="icon">✨</div>
+        <h3>Cleaner, clearer governance</h3>
+        <p>A leaner charter focused on core principles is easier to understand, maintain, and follow.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Endorsements — no box -->
+  <div style="margin-top:2.5rem; text-align:center;">
+    <h2 class="section-heading">Endorsements</h2>
+    <div class="people-grid">
+      <div class="person-card"><div class="name">Charles Maughan</div><div class="role">Mayor</div></div>
+      <div class="person-card"><div class="name">Jan Napack</div><div class="role">Ward 1 Councilor</div></div>
+      <div class="person-card"><div class="name">Jim Moorefield</div><div class="role">Ward 3 Councilor</div></div>
+      <div class="person-card"><div class="name">Carolyn Mayers</div><div class="role">Ward 8 Councilor</div></div>
+      <div class="person-card"><div class="name">Tony Cadena</div><div class="role">Ward 9 Councilor</div></div>
+      <div class="person-card nonpartisan" style="background:#e8f5e9;border-color:#a5d6a7;"><div class="name" style="color:#2e7d32;">Pacific Green Party</div><div class="role" style="color:#388e3c;">Linn/Benton County Chapter</div></div>
+    </div>
+    <div class="add-name-wrap" id="endorse-buttons"></div>
+  </div>
+</main>
+
+<footer>
+  <a href="https://www.corvallisoregon.gov/cm/page/may-2026-election-ballot-measures" target="_blank" rel="noopener">Official Ballot Measures</a> &bull;
+  <a href="https://www.corvallisoregon.gov/cm/page/city-charter" target="_blank" rel="noopener">Current City Charter</a> &bull;
+  <a href="https://archives.corvallisoregon.gov/public/ElectronicFile.aspx?dbid=0&docid=5717604" target="_blank" rel="noopener">Task Force Report (PDF)</a>
+  <br>
+  <a href="https://www.corvallisoregon.gov/cm/page/corvallis-charter-amendments-frequently-asked-questions" target="_blank" rel="noopener">FAQ</a> &bull;
+  <a href="/bc400.pdf" target="_blank" rel="noopener">BC-400 Template</a>
+  <br><br>
+  <span style="opacity:.65;">Paid for by Good Governance Corvallis (#24834)</span>
+</footer>
+
+<script>
+// ── Utilities ────────────────────────────────────────────────────
+function esc(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// Jaccard similarity on word sets — determines if we do word or block diff
+function jaccard(a, b) {
+  const ws = s => new Set(s.toLowerCase().match(/\b\w+\b/g) || []);
+  const A = ws(a), B = ws(b);
+  let common = 0;
+  for (const w of A) if (B.has(w)) common++;
+  return common / (A.size + B.size - common);
+}
+
+// Word-level LCS diff
+function wordDiff(before, after) {
+  const tok = s => s.match(/\S+|\s+/g) || [];
+  const a = tok(before), b = tok(after);
+  const m = a.length, n = b.length;
+  const dp = Array.from({length: m+1}, () => new Int32Array(n+1));
+  for (let i = m-1; i >= 0; i--)
+    for (let j = n-1; j >= 0; j--)
+      dp[i][j] = a[i] === b[j] ? dp[i+1][j+1]+1 : Math.max(dp[i+1][j], dp[i][j+1]);
+  const ops = []; let i = 0, j = 0;
+  while (i < m || j < n) {
+    if (i < m && j < n && a[i] === b[j]) { ops.push({t:'k', s:a[i++]}); j++; }
+    else if (j < n && (i >= m || dp[i][j+1] >= dp[i+1][j])) ops.push({t:'i', s:b[j++]});
+    else ops.push({t:'d', s:a[i++]});
+  }
+  return ops.map(o =>
+    o.t==='k' ? esc(o.s) :
+    o.t==='d' ? `<del class="w">${esc(o.s)}</del>` :
+                `<ins class="w">${esc(o.s)}</ins>`
+  ).join('');
+}
+
+function renderDiff(before, after, mode) {
+  if (mode === 'before') return `<div class="diff-content">${esc(before)}</div>`;
+  if (mode === 'after')  return `<div class="diff-content">${esc(after)}</div>`;
+
+  // Smart: use block diff for largely-rewritten sections
+  const sim = jaccard(before, after);
+  if (sim < 0.35) {
+    return `
+      <div style="padding:.75rem 1rem;">
+        <div class="block-del"><div class="block-label">Current text</div>${esc(before)}</div>
+        <div style="height:.5rem"></div>
+        <div class="block-ins"><div class="block-label">Proposed text</div>${esc(after)}</div>
+      </div>`;
+  }
+  return `<div class="diff-content">${wordDiff(before, after)}</div>`;
+}
+
+// ── Charter chapter URLs ─────────────────────────────────────────
+const BASE = 'https://www.corvallisoregon.gov/mc/page/';
+const SEC_CH = {
+  3:2,5:2,6:2, 7:3, 13:4,14:4,15:4,16:4,17:4,18:4,21:4,
+  '23f':5,24:5, 25:6,26:6,27:6,28:6,29:6,30:6,31:6,32:6,
+  33:7,34:7, 35:8,36:8,37:8, 41:9,42:9, 43:10,45:10,48:10
+};
+const CH_SLUG = {
+  2:'chapter-2-powers',3:'chapter-3-form-government',4:'chapter-4-council',
+  5:'chapter-5-powers-and-duties-officers',6:'chapter-6-elections',
+  7:'chapter-7-vacancies-office',8:'chapter-8-ordinances',
+  9:'chapter-9-public-improvements',10:'chapter-10-miscellaneous'
+};
+function chapterUrl(sec) {
+  const ch = SEC_CH[sec]; return ch ? BASE + CH_SLUG[ch] : null;
+}
+
+// ── Data ─────────────────────────────────────────────────────────
+const MEASURES = [
+  {
+    num:1, official:'2-143',
+    officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-amend-corvallis-city-charter-align-model-charter',
+    title:'Amending Language to Align with the Model Charter',
+    question:'Shall the City of Corvallis amend its existing charter to align language with the League of Oregon Cities\u2019 model charter?',
+    summary:'Updates <strong>12 sections</strong> that use outdated or unnecessarily different wording compared to the statewide model charter \u2014 without meaningfully changing what those sections do.',
+    sections:[
+      { sec:'3', title:'Powers of the City', kind:'amend',
+        before:`The City shall have all the rights, powers, privileges, and immunities which the constitutions, statutes, and common law of the United States and of this State expressly or impliedly grant or allow municipalities, including those rights, powers, privileges, and immunities which a City can exercise upon specifically accepting them or upon being granted the power to exercise them by the people of the City or the legislature of the State, as fully as though this Charter expressly stated each of those rights, powers, privileges, and immunities and as though each of them had been specifically accepted by the City or granted to it by the people of the City or by the legislature of the State. The powers contained herein from previously enacted Charters shall be deemed a part of the powers of the City. The City is further empowered to assess, levy, and collect taxes of all types for any and all lawful municipal purposes.`,
+        after:`The City has all powers that the constitutions, statutes, and common law of the United States and Oregon expressly or impliedly grant or allow the City, as fully as though this Charter specifically enumerated each of those powers. The City is further empowered to assess, levy, and collect taxes of all types for any and all lawful municipal purposes.` },
+
+      { sec:'7', title:'Where Powers Vested', kind:'amend',
+        before:`All powers of the City shall be vested in the City Council, except as otherwise provided by law or this Charter, and the Council shall provide for the exercise thereof and for the performance of all duties and obligations imposed on the City by law.`,
+        after:`Except as this Charter provides otherwise, all powers of the City shall be vested in the Council.` },
+
+      { sec:'13', title:'Salaries \u2192 Compensation', kind:'amend',
+        before:`Salaries. The compensation for the services of each City officer and employee shall be whatever amount the Council fixes.`,
+        after:`Compensation. The Council must authorize the compensation of City officers and employees as part of its approval of the City budget.` },
+
+      { sec:'15', title:'Meetings and Rules', kind:'amend',
+        before:`The Council shall hold a regular meeting at least once each month at a time and place in the City which it designates and shall adopt rules for the government of its members and proceedings. The Mayor upon their own motion may, or at the request of three members of the Council shall, by giving lawful notice, call a special meeting of the Council for a time not earlier than 24 hours nor later than 72 hours after the notice is given. In case of an actual emergency, a meeting may be held upon such notice as is appropriate under the circumstances, with the minutes describing the nature of the emergency justifying less than 24 hours notice.`,
+        after:`(a) The Council must meet at least once each month at a time and place in the City designated by its rules and may meet at other times in accordance with the rules and laws of the state of Oregon. The Mayor upon their own motion may, or at the request of three members of the Council shall, by giving lawful notice, call a special meeting of the Council for a time not earlier than 24 hours nor later than 72 hours after the notice is given. In case of an actual emergency, a meeting may be held upon such notice as is appropriate under the circumstances, with the minutes describing the nature of the emergency justifying less than 24 hours notice. (b) The Council must by resolution adopt rules to govern its meetings.` },
+
+      { sec:'17', title:'Journal \u2192 Record', kind:'amend',
+        before:`Journal. The Council shall cause a journal of its proceedings to be kept. Upon the request of any of its members the ayes and nays upon any question before it shall be taken and a record of the vote entered in the journal.`,
+        after:`Record. A record of Council meetings must be kept in a manner prescribed by the Council rules and the laws of the state of Oregon.` },
+
+      { sec:'23f', title:'\u00a723(f) Interference in Administration', kind:'amend',
+        before:`Neither the Mayor nor any member of the Council shall in any manner, directly or indirectly, by suggestion or otherwise, attempt to influence or coerce the Manager in the making of any appointment or removal of any officer or employee or in the purchase of supplies; or attempt to exact any promise relative to any appointment from any candidate for Manager, or discuss, directly or indirectly, with the Manager the matter of specific appointments to any City office or employment. A violation of the foregoing provisions of this section shall forfeit the office of the offender. Nothing in this section shall be construed, however, as prohibiting the Council, while in open session, from discussing with or suggesting to the Manager, fully and freely, anything pertaining to the City affairs or the interests of the City.`,
+        after:`In order to protect the fundamental form of government chosen by the voters, guard the power of the council as a body, defend against corruption, ensure transparency, and preserve the separation of authority set forth in this Charter between the manager's administrative authority and the council's general powers, no council member may actually coerce or attempt to coerce the manager or a candidate for the office of manager in the appointment or removal of any city employee, or in administrative decisions regarding city property or contracts. A violation of this prohibition is grounds for removal from office by a majority of the council after a public hearing. This prohibition does not apply in publicly noticed meetings, including but not limited to council or committee meetings, executive sessions, and work sessions.` },
+
+      { sec:'24', title:'Municipal Judge', kind:'amend',
+        before:`The Municipal Judge shall be the judicial officer of the City. The Judge shall be appointed and may be removed by the Council. The Judge shall hold within the City a court known as the Municipal Court for the City of Corvallis, Benton County, Oregon. Except on nonjudicial days, the Court shall be open for the transaction of judicial business. All area within the City and all property owned or controlled by the City shall be within the territorial jurisdiction of the Court. The Municipal Judge shall exercise original and exclusive jurisdiction of all crimes and offenses defined and made punishable by ordinances of the City and of all actions brought to recover or enforce forfeitures or penalties defined or authorized by an ordinance of the City. The Municipal Judge shall have authority to issue process for the arrest of any person accused of an offense against the ordinances of the City, to commit any such person to jail or admit a person to bail pending trial, to issue subpoenas, to compel witnesses to appear and testify in Court on the trial of any cause before the Municipal Judge, to compel obedience to such subpoenas, to issue any process necessary to carry into effect the judgments of the Court, and to punish witnesses and others for contempt of Court. Notwithstanding any other provision of this section to the contrary, the functions of the Municipal Judge and Municipal Court may be fulfilled by a State court when so appointed and designated by the Council. The City may have the duties of the Municipal Judge performed by the regular and pro-tempore judges of a State court. When not governed by ordinance or this Charter, all proceedings in the Municipal Court for the violation of a City ordinance shall be governed by the applicable general laws of the State governing justices of the peace and justice courts.`,
+        after:`(a) A majority of the Council may appoint and remove a municipal judge. A municipal judge will hold court in the city at such place as the Council directs. The court will be known as the Municipal Court. (b) All proceedings of this court will conform to state laws governing justices of the peace and justice courts. (c) All areas within the city and areas outside the city as permitted by state law are within the territorial jurisdiction of the court. (d) The Municipal Court has jurisdiction over every offense created by City ordinance. The court may enforce forfeitures and other penalties created by such ordinances. The court also has jurisdiction under state law unless limited by City ordinance. (e) The municipal judge may: 1. Render judgments and impose sanctions on persons and property; 2. Order the arrest of anyone accused of an offense against the City; 3. Commit to jail or admit to bail anyone accused of a City offense; 4. Issue and compel obedience to subpoenas; 5. Compel witnesses to appear and testify and jurors to serve for trials; 6. Penalize contempt of court; 7. Issue processes necessary to enforce judgments and orders of the court; 8. Issue search warrants; and 9. Perform other judicial and quasi-judicial functions assigned by ordinance. (f) The Council may appoint and may remove municipal judges pro tem. (g) The Council may transfer some or all of the functions of the Municipal Court to an appropriate state court.` },
+
+      { sec:'26', title:'Applicability of State Laws', kind:'amend',
+        before:`Except as the same may be inconsistent with the provisions of this Charter, all the laws of this State regulating and governing elections and proceedings and matters incidental or relating thereto or connected therewith shall apply to and govern elections under this Charter.`,
+        after:`City elections must conform to state law except as this Charter or ordinances provide otherwise. All elections for City offices must be nonpartisan.` },
+
+      { sec:'29', title:'Nominations', kind:'amend',
+        before:`Effective January 1, 1955, all elective officers of the City of Corvallis shall be elected on a nonpartisan ballot. The Council shall provide by ordinance for the nominating of elective officers by petition, which shall be the sole and exclusive method of nominating such elective officers.`,
+        after:`The Council must adopt an ordinance prescribing the manner for a person to be nominated to run for mayor or a city councilor position.` },
+
+      { sec:'41', title:'Special Assessments', kind:'amend',
+        before:`The procedure for levying, collecting and enforcing the payment of special assessments for public improvements or other services to be charged against real property shall be governed by ordinance.`,
+        after:`The procedure for levying, collecting and enforcing the payment of special assessments for public improvements or other services to be charged against real property will be governed by ordinance.` },
+
+      { sec:'43', title:'Existing Ordinances', kind:'amend',
+        before:`Existing Ordinances Continued. All ordinances of the City consistent with this Charter and in force when it takes effect shall remain in effect until amended or repealed.`,
+        after:`Existing Ordinances Continuation. All ordinances of the City consistent with this Charter and in force when it takes effect shall remain in effect until amended or repealed.` },
+
+      { sec:'45', title:'Repealing Clause', kind:'amend',
+        before:`All Charters and Charter amendments of the City adopted prior to the time that this Charter takes effect, except as herein otherwise provided, are hereby repealed.`,
+        after:`All Charter provisions enacted before this Charter takes effect, except as herein otherwise provided, are hereby repealed.` },
+    ],
+  },
+
+  {
+    num:2, official:'2-144',
+    officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-remove-corvallis-city-charter-provisions-align-model-charter',
+    title:'Removing Outdated Provisions to Align with the Model Charter',
+    question:'Shall the City of Corvallis remove provisions from its charter to align with the League of Oregon Cities\u2019 model charter?',
+    summary:'Removes <strong>9 sections</strong> whose subject matter is already governed by Oregon state law, addressed elsewhere in the charter, or better handled through city ordinance. Redundant provisions can create legal conflicts \u2014 removing them is cleaner and safer.',
+    sections:[
+      { sec:'18', kind:'remove', title:'Meetings to Be Public',
+        before:`All deliberations and proceedings of the Council shall be public, except as provided by State law.`,
+        reason:`Covered word-for-word by <a href="https://oregon.public.law/statutes/ors_192.630" target="_blank" rel="noopener">ORS 192.630</a> (Oregon Public Meetings Law), which already requires all meetings of any city governing body to be open to the public. Oregon's law is more comprehensive \u2014 it defines exceptions, notice requirements, executive session rules, and enforcement. The charter sentence adds nothing.` },
+      { sec:'25', kind:'remove', title:'General Elections',
+        before:`A general municipal election shall be held biennially in the City of Corvallis at the same time that the general biennial election for State and county officers is held in the State of Oregon, and at each general election the successors shall be elected for all elective offices whose terms of office expire prior to the next biennial election.`,
+        reason:`<a href="https://oregon.public.law/statutes/ors_chapter_254" target="_blank" rel="noopener">ORS Chapter 254</a> (Conduct of Elections) governs when and how city general elections are held. Specifically, <a href="https://www.oregonlegislature.gov/bills_laws/ors/ors254.html" target="_blank" rel="noopener">ORS 254.035</a> already requires city elections to coincide with the state biennial general election. The charter provision restates what state law already mandates.` },
+      { sec:'27', kind:'remove', title:'Qualifications of Electors',
+        before:`No person shall vote at any City election unless the person is a qualified elector of the State of Oregon and a resident of the City.`,
+        reason:`Voter eligibility is set by <a href="https://ballotpedia.org/Article_II,_Oregon_Constitution" target="_blank" rel="noopener">Oregon Constitution Article II, \u00a72</a> and implemented through <a href="https://oregon.public.law/statutes/ors_247.009" target="_blank" rel="noopener">ORS 247.009</a>, which states that a person may vote in a city election only if they are a registered elector of the city. The charter cannot define voter qualifications differently from state law, so this provision is both redundant and legally powerless.` },
+      { sec:'28', kind:'remove', title:'Special Elections',
+        before:`The Council shall have the power to call special elections. A special election shall be called by ordinance setting forth the purpose for which such special election shall be called and the proposition(s) to be voted on the day on which such election shall be held.`,
+        reason:`The authority and procedure for calling special elections is governed by <a href="https://oregon.public.law/statutes/ors_chapter_254" target="_blank" rel="noopener">ORS Chapter 254</a>. Cities already have this power under state law, and the detailed procedure for calling a special election is better suited to city ordinance (which can be updated without a ballot measure) than to the charter.` },
+      { sec:'30', kind:'remove', title:'Notice of Elections',
+        before:`The City Recorder shall give notice of all general or special elections by publication thereof in the City official newspaper once a week for two successive and consecutive weeks, within 30 days next preceding such election. Such notice shall state the officers to be elected, and/or measures to be voted upon as herein provided and, in case of a special election, the place designated for holding such election and the time thereof. Any error not affecting the substantial rights of voters shall not invalidate any election.`,
+        reason:`Election notice is governed by <a href="https://oregon.public.law/statutes/ors_254.095" target="_blank" rel="noopener">ORS 254.095</a>, which requires the city elections officer to file statements of offices, candidates, and measures with the county clerk no later than 61 days before the election. The county then handles public notice under state law. The charter's "official newspaper" requirement is outdated and more restrictive than state law requires.` },
+      { sec:'31', kind:'remove', title:'Canvass of Election Results',
+        before:`To canvass the results, the City Recorder shall call to the Recorder's assistance two qualified electors of the City, not of the same political party, and they three shall then canvass the returns of the election. A written statement of the canvass shall be made and signed by the canvassers, or a majority of them, and filed with the City Recorder. Such writing must contain a statement of the whole number of the votes cast at such election and the number given for any person for any office and the name of the persons elected and to what office and also the number of votes for or against any measure submitted to the people.`,
+        reason:`Canvassing of election results is governed by <a href="https://oregon.public.law/statutes/ors_254.565" target="_blank" rel="noopener">ORS 254.565</a>, which assigns this duty to the city elections officer (not a panel of local electors). The Benton County Elections Division conducts the canvass in practice. The charter's procedure \u2014 requiring two local electors from different parties \u2014 conflicts with how state law actually works.` },
+      { sec:'32', kind:'remove', title:'Initiative and Referendum',
+        before:`Initiative petitions shall be signed by a number of legal voters equal to 15 percent of the votes cast for Mayor at the last preceding municipal election. Referendum petitions shall be signed by a number of legal voters equal to 10 percent of the votes cast for Mayor at the last regular preceding municipal election.`,
+        reason:`Initiative and referendum powers are reserved to city voters directly by <a href="https://ballotpedia.org/Article_IV,_Oregon_Constitution" target="_blank" rel="noopener">Oregon Constitution Article IV, \u00a71(5)</a>. Signature thresholds for city measures are set by <a href="https://oregon.public.law/statutes/ors_250.305" target="_blank" rel="noopener">ORS 250.305</a> as a percentage of <em>registered electors</em> \u2014 a different and more current metric than "votes cast for Mayor." Keeping conflicting thresholds in the charter risks legal uncertainty about which rule applies.` },
+      { sec:'42', kind:'remove', title:'Public Improvement Contracts',
+        before:`All public improvement contracts shall be subject to the limitations of State law.`,
+        reason:`This section simply says city contracts must follow state law \u2014 which is already true by definition, with or without this sentence. <a href="https://oregon.public.law/statutes/ors_chapter_279c" target="_blank" rel="noopener">ORS Chapter 279C</a> (Public Contracting \u2014 Public Improvements and Related Contracts) comprehensively governs competitive bidding, prevailing wages, and all other requirements for public improvement contracts. The charter provision is pure surplusage.` },
+      { sec:'48', kind:'remove', title:'Amendments',
+        before:`An amendment to the Charter of the City of Corvallis, or new or supplemental Charter, may be proposed and submitted to the legal voters of the City by resolution of the Council. No amendment of the Charter shall be effective until it is approved by a majority of the votes cast thereon by the legal voters of the City. The ballot title of such amendment shall be the same as prepared and submitted with such amendment, or new or supplemental Charter, by the resolution of the Council.`,
+        reason:`The process for amending a home-rule charter is established directly by <a href="https://ballotpedia.org/Article_XI,_Oregon_Constitution" target="_blank" rel="noopener">Oregon Constitution Article XI, \u00a72</a>, which grants city voters the power to enact and amend charters. Charter amendments must go to voters regardless of what \u00a748 says. Removing this section does not change how amendments work \u2014 the constitutional requirement stands on its own.` },
+    ],
+  },
+
+  {
+    num:3, official:'2-145',
+    officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-amend-corvallis-city-charter-provisions-relating-exercise-powers',
+    title:'Exercise of Powers',
+    question:'Shall the City of Corvallis amend certain sections of its charter relating to the exercise of city powers?',
+    summary:'Updates <strong>5 sections</strong> to clearly define three types of Council authority \u2014 legislative (ordinances), administrative (resolutions), and quasi-judicial (orders) \u2014 and sets transparent procedures for adopting each.',
+    sections:[
+      { sec:'5', title:'Construction of the Charter', kind:'amend',
+        before:`The Charter shall be liberally construed to the end that the City may have all powers necessary or convenient for the conduct of its municipal affairs, including all powers that cities may assume pursuant to the laws and to the municipal home-rule provisions of the constitution of the State of Oregon.`,
+        after:`The Charter will be liberally construed so that the City may exercise fully all powers possible under this Charter and under United States and Oregon law. The specific mention of particular powers in the Charter shall not be construed as limiting in any way the general power granted in this Section. This Charter's interpretation shall be examined in its entirety. In this Charter no mention of a particular power, right, privilege, or immunity shall be construed to be exclusive or to restrict the scope of the powers, rights, privileges, or immunities which the City would have if the particular power was not mentioned.` },
+
+      { sec:'6', title:'Exercise of Powers', kind:'amend',
+        before:`All rights, powers, privileges, and immunities of the City shall be exercised in the manner prescribed in this Charter, or, if the manner be not prescribed in this Charter, then in the manner provided by ordinance or resolution of the Council or the laws of the State of Oregon.`,
+        after:`All rights, powers, privileges, and immunities of the City shall be exercised in the manner prescribed in this Charter, or, if the manner be not prescribed in this Charter, then in the manner provided by ordinance or resolution of the Council or the laws of the State of Oregon.\n\nDistribution. The Oregon Constitution reserves initiative and referendum powers as to all municipal legislation to City voters. This Charter vests all other City powers in the Council except as the Charter otherwise provides. The Council has legislative, administrative, and quasi-judicial authority. The Council exercises legislative authority by ordinance, administrative authority by resolution, and quasi-judicial authority by order. The Council may not delegate its authority to adopt ordinances.` },
+
+      { sec:'35', title:'Enacting Clause \u2192 Legislative Authority (Ordinances)', kind:'amend',
+        before:`The enacting clause of all ordinances hereafter enacted by the Council shall be: "The City of Corvallis ordains as follows:"`,
+        after:`(a) General. The Council will exercise its legislative authority by adopting ordinances. The enacting clause for all ordinances must state "The City of Corvallis ordains as follows:"\n\n(b) Ordinance Adoption.\n  1. Except as authorized by subsection (2), adoption of an ordinance requires approval by a majority of the Council at two meetings.\n  2. The Council may adopt an ordinance at a single meeting by the unanimous approval of at least a quorum of the Council, provided the proposed ordinance is available in writing to the public at least one week before the meeting.\n  3. Any substantive amendment to a proposed ordinance must be read aloud or made available in writing to the public before the Council adopts the ordinance at that meeting.\n  4. After the adoption of an ordinance, the vote of each member must be entered into the Council minutes.\n  5. After adoption of an ordinance, the City Recorder must endorse it with the date of adoption and the Recorder's name and title.` },
+
+      { sec:'36', title:'Ordinance Passage \u2192 Administrative Authority (Resolutions)', kind:'amend',
+        before:`The procedure for passing ordinances shall be such as the Council by ordinance determines. Upon passage, the Recorder shall endorse it with the date of its passage and the Recorder's name and title of office, and within three days thereafter the Mayor shall sign it with the date, the Mayor's name, and the title of the office, unless the Mayor vetoes or does not return such ordinance as provided in Section 22.`,
+        after:`(a) General. The Council will normally exercise its administrative authority by approving resolutions. The approving clause for resolutions may state "The City of Corvallis resolves as follows:"\n\n(b) Resolution Approval.\n  1. Approval of a resolution or any other Council administrative decision requires approval by the Council at one meeting.\n  2. Any substantive amendment to a resolution must be read aloud or made available in writing to the public before the Council adopts the resolution at that meeting.\n  3. After approval of a resolution or other administrative decision, the vote of each member must be entered into the Council minutes.\n  4. After approval of a resolution, the City Recorder must endorse it with the date of approval and the Recorder's name and title.\n\n(c) Effective Date. Resolutions and other administrative decisions take effect on the date of approval or on a later day provided in the resolution.` },
+
+      { sec:'37', title:'Ordinance Effect Date \u2192 Quasi-Judicial Authority (Orders)', kind:'amend',
+        before:`An ordinance enacted by the Council shall take effect on the tenth day after its enactment. When the Council deems it advisable, however, an ordinance may provide a later time for it to take effect, and, in case of an emergency, it may take effect immediately.`,
+        after:`(a) General. The Council will normally exercise its quasi-judicial authority by approving orders. The approving clause for orders may state "The City of Corvallis orders as follows:"\n\n(b) Order Approval.\n  1. Approval of an order or any other Council quasi-judicial decision requires approval by the Council at one meeting.\n  2. Any substantive amendment to an order must be read aloud or made available in writing to the public at the meeting before the Council adopts the order.\n  3. After approval of an order or other Council quasi-judicial decision, the vote of each member must be entered in the Council minutes.\n  4. After approval of an order, the City Recorder must endorse it with the date of approval and the Recorder's name and title.\n\n(c) Effective Date. Orders and other quasi-judicial decisions take effect on the date of final approval, or on a later day provided in the order.` },
+    ],
+  },
+
+  {
+    num:4, official:'2-146',
+    officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-amend-corvallis-charter-relating-vacancies-quorum-qualifications-office',
+    title:'Vacancies, Quorum, and Qualifications',
+    question:'Shall the City of Corvallis amend its charter provisions relating to vacancies in office, quorum requirements, and qualifications for office?',
+    summary:'Updates <strong>5 interrelated sections</strong> to clarify who qualifies for office, what triggers a vacancy, how quorum works when seats are empty, and how vacancies are filled \u2014 including a critical safety net for filling multiple simultaneous vacancies.',
+    sections:[
+      { sec:'14', title:'Qualifications for Office', kind:'amend',
+        before:`Qualifications. No person is eligible to fill an elective office of the City unless the person is a qualified elector of the City and unless the person has resided in the City one year immediately preceding any election at which the person is a candidate.\n\nConflicts of interest. Conflicts of interest are prohibited. All officers of the City are subject to the strictures, limitations and penalties of all applicable laws.`,
+        after:`(a) The Mayor and each Councilor must be a qualified elector under state law and reside within the city for at least one year immediately before election or appointment to office.\n(b) No person may be a candidate at a single election for more than one City office.\n(c) Neither the Mayor nor a Councilor may be employed by the City.\n(d) The Council is the final judge of the election and qualifications of its members.` },
+
+      { sec:'16', title:'Quorum', kind:'amend',
+        before:`A majority of the members of the Council shall constitute a quorum for it to do business, but a smaller number may meet and compel the attendance of absent members in a manner provided by ordinance.`,
+        after:`Except as specifically addressed here and in Section 34, a majority of the Council members is a quorum to conduct business. In the event of an absence, a smaller number may meet and compel attendance of absent members as prescribed by Council rules. In the event of a vacancy due to resignation or other events, the quorum is reduced accordingly solely for the purpose to make necessary appointment(s) to reach the required quorum as outlined in Section 34.` },
+
+      { sec:'21', title:'Vote Required', kind:'amend',
+        before:`Except as this Charter otherwise provides, the concurrence of a majority of the members of the Council present at a Council meeting shall be necessary to decide any question before the Council.`,
+        after:`The express approval of a majority of a quorum of the Council is necessary for any Council decision, except when this Charter provides otherwise. The voting requirement to fill Council member vacancies, if there is less than a majority of council members remaining, is separate from the quorum requirement required to conduct all remaining City business unless otherwise stated.` },
+
+      { sec:'33', title:'What Creates a Vacancy', kind:'amend',
+        before:`An office shall be deemed vacant upon the incumbent's death, incompetence, conviction of a felony, resignation or absence from the City for 30 days without the consent of the Council in case of the Mayor or Councilor; upon the incumbent's ceasing to possess the qualifications necessary for the office; or upon the failure of the person elected or appointed to an office to qualify therefor within three days after the time for the term of office to commence; and in case of the Mayor or a Councilor, upon absence from meetings of the Council for 60 days without the consent of the Council.`,
+        after:`The mayor or a council office becomes vacant:\n\na) Upon the incumbent's:\n  1) Death;\n  2) Adjudicated incompetence; or\n  3) Recall from the office.\n\nb) Upon declaration by the Council after the incumbent's:\n  1) Failure to qualify for the office within 10 days of the time the term of office is to begin;\n  2) Absence from the city for 30 consecutive days without Council consent;\n  3) Absence from all meetings of the full Council within a 60-day period without Council consent;\n  4) Absence from greater than one-quarter of all meetings of the full Council within a calendar year, calculated based only on those meetings during which the incumbent was in office;\n  5) Ceasing to reside in the city;\n  6) Ceasing to be a qualified elector under state law;\n  7) Ceasing to possess the qualifications necessary for the office;\n  8) Conviction of a misdemeanor or felony crime; or\n  9) Resignation from the office.\n\nFor purposes of this section, "meetings of the full Council" means regular Council meetings and Council work sessions.` },
+
+      { sec:'34', title:'Filling Vacancies', kind:'amend',
+        before:`A mayor or councilor vacancy shall be filled by appointment by a majority of the remaining Council members. The appointee's term of office runs from appointment until expiration of the term of office of the last person elected to that office. If a disability prevents a Council member from attending Council meetings or a member is absent from the city, a majority of the Council may appoint a councilor pro tem.`,
+        after:`Notwithstanding the quorum requirement set forth in Section 16, if at any time Council membership is reduced to less than five, the remaining members may, by majority action, appoint additional members to raise the membership to five. As little as a single Council member may constitute a majority for purposes of filling vacant Council seat(s) if all other Council seats are vacant, and the Mayor may vote and constitute a majority for purposes of filling vacant Council seats if all Council seats are vacant.\n\na) The City Council must fill vacant positions on the City Council by appointment. Any ordinance establishing a process to fill vacant City Council positions must:\n  1. Fill any vacant position no later than 60 days after the vacancy is declared.\n  2. Invite nominations from the ward with the vacant position.\n  3. Interview nominees and hold a public hearing prior to the Council voting to make any appointment.\n\nb) If there is a vacancy in the office of Mayor which occurs 120 or more days prior to the first day of the new term, the vacancy must be filled by a City-wide special election within 60 days when possible, or at the next scheduled State election date thereafter. Should a vacancy occur leaving fewer than 120 days remaining in the term, the candidate who receives the most votes for that office in the regular election will assume office immediately upon validation of the vote.` },
+    ],
+  },
+];
+
+// ── Endorse email ────────────────────────────────────────────────
+const EMAIL_TO = 'endorse@corvallischarter.info';
+
+const EMAIL_SUBJECT = 'Endorsement — Corvallis Charter Measures 2026';
+
+const EMAIL_BODY = `\
+I would like to add my, or my organization's, name as an endorser. Please find \
+attached FOUR completed BC-400 (Measure Argument) forms, one per measure, which \
+I have filled out using the template at https://corvallischarter.info/bc400.pdf`;
+
+const mailtoHref =
+  `mailto:${EMAIL_TO}` +
+  `?subject=${encodeURIComponent(EMAIL_SUBJECT)}` +
+  `&body=${encodeURIComponent(EMAIL_BODY)}`;
+
+document.getElementById('endorse-buttons').innerHTML = `
+  <a class="add-name-btn primary" href="${mailtoHref}">+ Add your name</a>
+  <a class="add-name-btn secondary" href="/bc400.pdf" target="_blank" rel="noopener">BC-400</a>`;
+
+// ── Render ───────────────────────────────────────────────────────
+function renderSectionRow(m, s, idx) {
+  const key = `m${m.num}s${s.sec}`;
+  const url = chapterUrl(s.sec);
+  const linkHtml = url
+    ? ` <a class="sec-charter-link" href="${url}" target="_blank" rel="noopener" onclick="event.stopPropagation()">\u2197 charter</a>`
+    : '';
+
+  const tabsHtml = s.kind === 'amend' ? `
+    <div class="diff-view-tabs">
+      <button class="diff-tab active" onclick="setView('${key}','diff',this)">Diff</button>
+      <button class="diff-tab" onclick="setView('${key}','before',this)">Current</button>
+      <button class="diff-tab" onclick="setView('${key}','after',this)">Proposed</button>
+    </div>` : '';
+
+  const bodyHtml = s.kind === 'remove'
+    ? `<div class="removed-block">${esc(s.before)}</div><div class="remove-reason">Why removed: ${s.reason}</div>`
+    : renderDiff(s.before, s.after, 'diff');
+
+  return `
+    <div class="section-row" id="${key}">
+      <div class="section-row-header" onclick="toggleRow('${key}')">
+        <span class="sec-num">\u00a7${s.sec}</span>
+        <span class="sec-title">${s.title}${linkHtml}</span>
+        <span class="sec-kind ${s.kind}">${s.kind === 'remove' ? 'removed' : 'amended'}</span>
+        <span class="sec-chevron">&#8964;</span>
+      </div>
+      <div class="section-diff" id="${key}-diff">
+        ${tabsHtml}
+        <div id="${key}-body">${bodyHtml}</div>
+      </div>
+    </div>`;
+}
+
+function renderMeasure(m) {
+  const rowsHtml = m.sections.map((s,i) => renderSectionRow(m, s, i)).join('');
+  return `
+    <div class="measure-card" id="m${m.num}">
+      <div class="measure-header" onclick="toggleCard('m${m.num}')">
+        <div class="badge">${m.num}</div>
+        <div class="measure-meta">
+          <div class="measure-number">Measure ${m.official} &bull; <a href="${m.officialUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Official city page \u2197</a></div>
+          <h3>${m.title}</h3>
+          <p class="question">${m.question}</p>
+        </div>
+        <span class="chevron">&#8964;</span>
+      </div>
+      <div class="measure-summary">${m.summary}</div>
+      <div class="measure-detail">
+        <div class="detail-inner">
+          <p class="detail-intro">
+            Click any row to expand the text changes.
+            In diff view: <span class="legend-ins">added</span> <span class="legend-del">removed</span>.
+            Sections rewritten from scratch show as colored blocks instead of word-by-word.
+          </p>
+          <div class="section-list">${rowsHtml}</div>
+        </div>
+      </div>
+    </div>`;
+}
+
+document.getElementById('measures-container').innerHTML = MEASURES.map(renderMeasure).join('');
+
+// ── Interaction ──────────────────────────────────────────────────
+function toggleCard(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+
+function toggleRow(key) {
+  document.getElementById(key).classList.toggle('open');
+}
+
+function setView(key, mode, btn) {
+  let m_data, s_data;
+  outer: for (const m of MEASURES)
+    for (const s of m.sections)
+      if (`m${m.num}s${s.sec}` === key) { m_data = m; s_data = s; break outer; }
+  if (!s_data) return;
+
+  document.getElementById(key + '-body').innerHTML = renderDiff(s_data.before, s_data.after, mode);
+
+  btn.closest('.diff-view-tabs').querySelectorAll('.diff-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
