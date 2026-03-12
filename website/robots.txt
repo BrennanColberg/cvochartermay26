@@ -1,2 +1,2 @@
 User-agent: *
-Disallow: /SECRET_DRAFT_DO_NOT_SHARE/
+Disallow: /secret_draft_do_not_share/
