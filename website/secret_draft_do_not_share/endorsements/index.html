@@ -32,9 +32,9 @@
   </div>
 
   <div class="donate-cta-strip">
-    <h3>Support the campaign financially</h3>
-    <p>Help us reach every Corvallis voter. Donations by check or cash.</p>
-    <a href="../donate/" class="btn-donate-cta">DONATE</a>
+    <h3>Yes For Good Governance And A Better Corvallis</h3>
+    <p>Help us reach every voter. Donations by check or cash.</p>
+    <a href="../donate/" class="btn-donate-cta">GET INVOLVED</a>
   </div>
 
 </main>
@@ -46,9 +46,19 @@
 <script src="../endorsers.js"></script>
 <script>
 renderEndorsers('endorsers-grid');
-const EMAIL_TO = 'endorse@corvallischarter.info';
+const EMAIL_TO = 'endorse@goodgovernancecorvallis.org';
 const EMAIL_SUBJECT = 'Endorsement \u2014 Corvallis Charter Measures 2026';
-const EMAIL_BODY = `I would like to add my, or my organization's, name as an endorser. Please find attached FOUR completed BC-400 (Measure Argument) forms, one per measure, which I have filled out using the template at https://corvallischarter.info/bc400.pdf`;
+const EMAIL_BODY = `I would like to add my, or my organization's, name as an endorser.
+
+I have EITHER:
+
+(1) Attached FOUR completed BC-400 (Measure Argument) forms, one per measure, which I have filled out using the template at https://goodgovernancecorvallis.org/bc400.pdf
+
+(2) Mailed a completed contribution/remittance form (available at https://goodgovernancecorvallis.org/donate-form.pdf), along with my donation by check or cash, using an envelope printed with the template at https://goodgovernancecorvallis.org/donate-envelope.pdf or otherwise, to:
+
+Good Governance Corvallis
+2834 NW Rolling Green Drive
+Corvallis, OR 97330`;
 const mailtoHref = `mailto:${EMAIL_TO}?subject=${encodeURIComponent(EMAIL_SUBJECT)}&body=${encodeURIComponent(EMAIL_BODY)}`;
 document.getElementById('endorse-buttons').innerHTML = `
   <a class="add-name-btn primary" href="${mailtoHref}">+ Add your name</a>`;

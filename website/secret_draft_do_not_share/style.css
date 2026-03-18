@@ -53,8 +53,8 @@ header h1 span { color: #fff; white-space: nowrap; }
 .lead { max-width: 640px; margin: 0 auto 1.75rem; font-size: 1.1rem; opacity: .92; }
 .btn { display: inline-block; background: var(--color-oak-leaf); color: #fff; font-weight: 700; font-size: 1rem; padding: .75rem 2rem; border-radius: 999px; text-decoration: none; }
 .btn:hover { background: var(--color-rye-grass); }
-.btn-donate-hero { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: .7rem 2rem; border-radius: 999px; text-decoration: none; transition: background .15s; margin-left: .75rem; }
-.btn-donate-hero:hover { background: var(--accent-dark); }
+.btn-donate-hero { display: inline-block; background: #fff; color: var(--accent); font-weight: 700; font-size: 1.05rem; padding: .7rem 2rem; border-radius: 999px; text-decoration: none; transition: background .15s, color .15s; margin-left: .75rem; }
+.btn-donate-hero:hover { background: var(--accent-dark); color: #fff; }
 
 /* ── Page header (subpages) ──────────────────────────────────────── */
 .page-header { background: var(--green); color: #fff; text-align: center; padding: 2.5rem 1.5rem 2rem; }
@@ -62,7 +62,7 @@ header h1 span { color: #fff; white-space: nowrap; }
 .page-header .sub { color: var(--color-light-green); font-size: .95rem; }
 
 /* ── Intro ───────────────────────────────────────────────────────── */
-.intro { background: var(--green-pale); border-bottom: 1px solid var(--border); text-align: center; padding: 2rem 1.5rem; }
+.intro { background: var(--green-pale); border-bottom: 1px solid var(--border); text-align: center; padding: 1rem 1.5rem; }
 .intro p { max-width: 700px; margin: 0 auto; font-size: 1.05rem; color: var(--green); }
 .intro a { color: var(--green); font-weight: 700; }
 
