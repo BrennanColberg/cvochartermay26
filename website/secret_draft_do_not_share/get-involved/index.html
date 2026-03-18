@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Get Involved — Good Governance Corvallis</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+<nav id="site-nav">
+  <a class="nav-brand" href="../">Good Governance Corvallis</a>
+  <div class="nav-links">
+    <a href="../#measures">Learn More</a>
+    <a href="../news/">Latest News</a>
+    <a href="../endorsements/">Endorsements</a>
+    <a href="../donate/" aria-current="page">Get Involved</a>
+    <a href="../donate/" class="nav-donate">DONATE</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Get Involved</h1>
+  <p class="sub">There are many ways to help pass these four measures</p>
+</div>
+
+<main>
+
+  <div class="involve-grid">
+    <div class="involve-item">
+      <div class="involve-icon">✉️</div>
+      <h3>Write a Letter</h3>
+      <p>Submit a letter to the editor of the Gazette-Times or Corvallis Advocate in support of the measures.</p>
+    </div>
+    <div class="involve-item">
+      <div class="involve-icon">📬</div>
+      <h3>Distribute Literature</h3>
+      <p>Help us get flyers and door hangers into neighborhoods across Corvallis.</p>
+    </div>
+    <div class="involve-item">
+      <div class="involve-icon">📣</div>
+      <h3>Spread the Word</h3>
+      <p>Share this website with your social networks, neighborhood groups, and community organizations.</p>
+    </div>
+    <div class="involve-item">
+      <div class="involve-icon">🖊️</div>
+      <h3>Add Your Endorsement</h3>
+      <p>Let your name appear publicly as a supporter of good governance in Corvallis.</p>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:2rem;">
+    <div id="endorse-buttons"></div>
+  </div>
+
+  <div class="donate-cta-strip">
+    <h3>Support the campaign financially</h3>
+    <p>Help us reach every Corvallis voter. Donations by check or cash.</p>
+    <a href="../donate/" class="btn-donate-cta">DONATE</a>
+  </div>
+
+</main>
+
+<footer>
+  <span style="opacity:.65;">Paid for by Good Governance Corvallis (#24834)</span>
+</footer>
+
+<script>
+const EMAIL_TO = 'endorse@corvallischarter.info';
+const EMAIL_SUBJECT = 'Endorsement \u2014 Corvallis Charter Measures 2026';
+const EMAIL_BODY = `I would like to add my, or my organization's, name as an endorser. Please find attached FOUR completed BC-400 (Measure Argument) forms, one per measure, which I have filled out using the template at https://corvallischarter.info/bc400.pdf`;
+const mailtoHref = `mailto:${EMAIL_TO}?subject=${encodeURIComponent(EMAIL_SUBJECT)}&body=${encodeURIComponent(EMAIL_BODY)}`;
+document.getElementById('endorse-buttons').innerHTML = `
+  <a class="add-name-btn primary" href="${mailtoHref}">+ Add your name</a>
+</script>
+</body>
+</html>

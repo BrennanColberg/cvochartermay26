@@ -4,241 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vote Yes — Corvallis Charter Measures, May 2026</title>
-  <style>
-    :root {
-      /* Corvallis Visual Identity Color Palette */
-      --color-marionberry:     #AC395A;
-      --color-autumn:          #CA6534;
-      --color-rye-grass:       #668343;
-      --color-oak-leaf:        #415526;
-      --color-light-orange:    #F79228;
-      --color-honey:           #FBB342;
-      --color-lightest-orange: #FFDAA4;
-      --color-light-green:     #B1C58F;
-      --color-lightest-green:  #EDF3D3;
-      --color-light-pink:      #F5A4BD;
-      --color-lightest-pink:   #FCDBDC;
-
-      /* Semantic tokens */
-      --green:       var(--color-oak-leaf);      /* #415526 — dark headers, badges, footer */
-      --green-light: var(--color-rye-grass);     /* #668343 — labels, links, tab active */
-      --green-pale:  var(--color-lightest-green);/* #EDF3D3 — tinted backgrounds */
-      --accent:      var(--color-autumn);        /* #CA6534 — primary CTA / highlights */
-      --accent-dark: #a84e24;                    /* darker autumn for hover */
-      --text: #1b1b1b;
-      --muted: #666;
-      --bg: #f9f9f7;
-      --card: #ffffff;
-      --border: var(--color-light-green);        /* #B1C58F */
-      --radius: 10px;
-      --del-bg: #fff0f0;
-      --del-text: #b91c1c;
-      --del-border: #fca5a5;
-      --ins-bg: #f0fff4;
-      --ins-text: #065f46;
-      --ins-border: #6ee7b7;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
-
-    /* Hero */
-    header { background: var(--color-autumn); color: #fff; text-align: center; padding: 3.5rem 1.5rem 3rem; }
-    .eyebrow { font-family: Arial, sans-serif; font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .8; margin-bottom: .75rem; }
-    header h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; }
-    header h1 span { color: #fff; white-space: nowrap; }
-    .lead { max-width: 640px; margin: 0 auto 1.75rem; font-size: 1.1rem; opacity: .92; }
-    .btn { display: inline-block; background: var(--color-oak-leaf); color: #fff; font-family: Arial, sans-serif; font-weight: 700; font-size: 1rem; padding: .75rem 2rem; border-radius: 999px; text-decoration: none; }
-    .btn:hover { background: var(--color-rye-grass); }
-
-    /* Intro */
-    .intro { background: var(--green-pale); border-bottom: 1px solid var(--border); text-align: center; padding: 2rem 1.5rem; }
-    .intro p { max-width: 700px; margin: 0 auto; font-size: 1.05rem; color: var(--green); }
-    .intro a { color: var(--green); font-weight: 700; }
-
-    /* Layout */
-    main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
-    .section-heading { font-family: Arial, sans-serif; font-size: 1rem; letter-spacing: .1em; text-transform: uppercase; color: var(--green-light); margin-bottom: 1.25rem; }
-
-    /* Measure cards */
-    .measures { display: flex; flex-direction: column; gap: 1.25rem; }
-    .measure-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
-
-    .measure-header { display: flex; align-items: flex-start; gap: 1rem; padding: 1.4rem 1.5rem; cursor: pointer; user-select: none; }
-    .measure-header:hover { background: var(--green-pale); }
-    .badge { flex-shrink: 0; width: 2.6rem; height: 2.6rem; border-radius: 50%; background: var(--green); color: #fff; font-family: Arial, sans-serif; font-weight: 800; font-size: 1.15rem; display: flex; align-items: center; justify-content: center; }
-    .measure-meta { flex: 1; }
-    .measure-number { font-family: Arial, sans-serif; font-size: .78rem; font-weight: 600; color: var(--green-light); letter-spacing: .04em; margin-bottom: .3rem; }
-    .measure-number a { color: var(--green-light); }
-    .measure-meta h3 { font-size: 1.15rem; font-weight: 700; line-height: 1.25; margin-bottom: .3rem; }
-    .question { font-size: .93rem; color: var(--muted); font-style: italic; }
-    .chevron { flex-shrink: 0; font-size: 1.2rem; color: var(--green-light); margin-top: .25rem; transition: transform .2s; }
-    .measure-card.open .chevron { transform: rotate(180deg); }
-    .measure-summary { padding: 0 1.5rem 1.4rem 4.1rem; font-size: .97rem; color: var(--muted); }
-
-    /* Measure detail */
-    .measure-detail { display: none; border-top: 1px solid var(--border); }
-    .measure-card.open .measure-detail { display: block; }
-    .detail-inner { padding: 1.25rem 1.5rem 1.5rem; background: #fafcfa; }
-    .detail-intro { font-family: Arial, sans-serif; font-size: .82rem; color: var(--muted); margin-bottom: 1rem; }
-    .detail-intro span { display: inline-block; padding: .1rem .45rem; border-radius: 3px; font-size: .78rem; font-weight: 600; margin-right: .3rem; }
-    .legend-del { background: var(--del-bg); color: var(--del-text); border: 1px solid var(--del-border); }
-    .legend-ins { background: var(--ins-bg); color: var(--ins-text); border: 1px solid var(--ins-border); }
-
-    /* Section rows */
-    .section-list { border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
-    .section-row { border-bottom: 1px solid var(--border); }
-    .section-row:last-child { border-bottom: none; }
-
-    .section-row-header {
-      display: flex; align-items: center; gap: .75rem;
-      padding: .65rem 1rem; cursor: pointer; user-select: none;
-      background: #fff; transition: background .1s;
-    }
-    .section-row-header:hover { background: var(--green-pale); }
-    .section-row.open .section-row-header { background: var(--color-lightest-green); }
-
-    .sec-num { font-family: Arial, sans-serif; font-size: .8rem; font-weight: 700; color: var(--green); min-width: 2.5rem; }
-    .sec-title { font-family: Arial, sans-serif; font-size: .88rem; flex: 1; color: var(--text); }
-    .sec-charter-link { font-family: Arial, sans-serif; font-size: .75rem; color: var(--green-light); text-decoration: none; white-space: nowrap; }
-    .sec-charter-link:hover { text-decoration: underline; }
-    .sec-kind { font-family: Arial, sans-serif; font-size: .72rem; font-weight: 700; padding: .15rem .5rem; border-radius: 999px; white-space: nowrap; }
-    .sec-kind.amend { background: #e8f4fd; color: #1d6fa4; }
-    .sec-kind.remove { background: var(--del-bg); color: var(--del-text); }
-    .sec-chevron { font-size: .9rem; color: var(--muted); transition: transform .2s; flex-shrink: 0; }
-    .section-row.open .sec-chevron { transform: rotate(180deg); }
-
-    /* Diff panel */
-    .section-diff { display: none; border-top: 1px solid var(--border); background: #fff; }
-    .section-row.open .section-diff { display: block; }
-
-    .diff-view-tabs { display: flex; gap: 4px; padding: .6rem 1rem; background: var(--green-pale); border-bottom: 1px solid var(--border); }
-    .diff-tab { font-family: Arial, sans-serif; font-size: .75rem; font-weight: 600; padding: .25rem .65rem; border: 1px solid var(--border); border-radius: 4px; cursor: pointer; background: #fff; color: var(--muted); }
-    .diff-tab.active { background: var(--green); color: #fff; border-color: var(--green); }
-
-    .diff-content { padding: 1rem; font-size: .875rem; line-height: 1.8; font-family: 'Courier New', monospace; white-space: pre-wrap; word-break: break-word; }
-
-    /* Word-level diff tokens */
-    del.w { background: var(--del-bg); color: var(--del-text); text-decoration: line-through; border-radius: 2px; padding: 0 1px; }
-    ins.w { background: var(--ins-bg); color: var(--ins-text); text-decoration: none; border-radius: 2px; padding: 0 1px; }
-
-    /* Block-level diff */
-    .block-del {
-      background: var(--del-bg); border-left: 3px solid var(--del-border);
-      padding: .65rem .9rem; margin-bottom: .5rem; border-radius: 0 4px 4px 0;
-      color: var(--del-text); font-size: .875rem; line-height: 1.75;
-      font-family: 'Courier New', monospace; white-space: pre-wrap; word-break: break-word;
-    }
-    .block-ins {
-      background: var(--ins-bg); border-left: 3px solid var(--ins-border);
-      padding: .65rem .9rem; border-radius: 0 4px 4px 0;
-      color: var(--ins-text); font-size: .875rem; line-height: 1.75;
-      font-family: 'Courier New', monospace; white-space: pre-wrap; word-break: break-word;
-    }
-    .block-label {
-      font-family: Arial, sans-serif; font-size: .7rem; font-weight: 700;
-      letter-spacing: .06em; text-transform: uppercase; opacity: .6;
-      margin-bottom: .3rem;
-    }
-
-    /* Removed section */
-    .removed-block {
-      background: var(--del-bg); border-left: 3px solid var(--del-border);
-      padding: .75rem 1rem; font-family: 'Courier New', monospace;
-      font-size: .875rem; line-height: 1.75; white-space: pre-wrap; word-break: break-word;
-      color: var(--del-text); text-decoration: line-through;
-    }
-    .remove-reason {
-      font-family: Arial, sans-serif; font-size: .8rem; color: var(--muted);
-      font-style: italic; padding: .5rem 1rem .75rem;
-    }
-
-    /* Why section */
-    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 1.2rem; margin-top: 1.25rem; }
-    .why-item { background: var(--green-pale); border-radius: var(--radius); padding: 1rem 1.1rem; }
-    .why-item .icon { font-size: 1.6rem; margin-bottom: .5rem; }
-    .why-item h3 { font-family: Arial, sans-serif; font-size: .95rem; font-weight: 700; margin-bottom: .35rem; }
-    .why-item p { font-size: .88rem; color: var(--muted); }
-
-    /* Shared people-grid used by both task force and endorsements */
-    .people-section { padding: 2rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); text-align: center; }
-    .people-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: .65rem; margin-top: 1.25rem; }
-    .person-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: .75rem 1.1rem; font-size: .9rem; min-width: 150px; }
-    .person-card .name { font-weight: 700; }
-    .person-card .role { color: var(--muted); font-size: .8rem; }
-    /* org card variants */
-    .person-card.nonpartisan { background: #f3f3f3; border-color: #ccc; }
-    .person-card.nonpartisan .name { color: #444; }
-    .person-card.dem { background: #ddeeff; border-color: #9bbede; }
-    .person-card.dem .name { color: #1a4f8a; }
-    .person-card.rep { background: #fde8e8; border-color: #f0a0a0; }
-    .person-card.rep .name { color: #9b1c1c; }
-
-    /* Add your name */
-    .add-name-wrap { margin-top: 1.5rem; display: flex; justify-content: center; gap: .5rem; flex-wrap: wrap; }
-    .add-name-btn { display: inline-block; font-family: Arial, sans-serif; font-size: .88rem; font-weight: 600; border-radius: 999px; padding: .45rem 1.25rem; text-decoration: none; transition: background .15s, color .15s; }
-    .add-name-btn.primary { background: var(--green); color: #fff; border: 1.5px solid var(--green); }
-    .add-name-btn.primary:hover { background: var(--green-light); border-color: var(--green-light); }
-    .add-name-btn.secondary { background: #fff; color: var(--green); border: 1.5px solid var(--green-light); }
-    .add-name-btn.secondary:hover { background: var(--green-pale); }
-
-    /* Footer */
-    footer { background: var(--green); color: var(--color-light-green); text-align: center; padding: 2rem 1.5rem; font-size: .85rem; font-family: Arial, sans-serif; }
-    footer a { color: var(--color-light-green); text-decoration: underline; }
-    footer strong { color: #fff; }
-
-    /* Sticky nav */
-    #site-nav { position: sticky; top: 0; z-index: 100; background: var(--green); display: flex; align-items: center; justify-content: space-between; padding: .55rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.3); gap: 1rem; }
-    #site-nav .nav-brand { color: #fff; font-weight: 700; font-size: .9rem; white-space: nowrap; text-decoration: none; }
-    #site-nav .nav-links { display: flex; align-items: center; gap: .15rem; flex-wrap: wrap; }
-    #site-nav .nav-links a { color: var(--color-light-green); text-decoration: none; font-size: .82rem; padding: .3rem .55rem; border-radius: 4px; transition: background .15s, color .15s; white-space: nowrap; }
-    #site-nav .nav-links a:hover { background: rgba(255,255,255,.12); color: #fff; }
-    #site-nav .nav-links a.nav-donate { background: var(--accent); color: #fff; font-weight: 700; font-size: .85rem; padding: .35rem .85rem; border-radius: 999px; margin-left: .4rem; }
-    #site-nav .nav-links a.nav-donate:hover { background: var(--accent-dark); }
-    [id] { scroll-margin-top: 3.2rem; }
-
-    /* Donate section */
-    .donate-section { margin-top: 2.5rem; background: var(--green); color: #fff; border-radius: var(--radius); padding: 2.5rem 2rem; text-align: center; }
-    .donate-section h2 { color: #fff; border-color: rgba(255,255,255,.25); }
-    .donate-section p { color: var(--color-light-green); }
-    .donate-section strong { color: #fff; }
-    .donate-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1.75rem 0; text-align: left; }
-    .donate-step { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15); border-radius: var(--radius); padding: 1.1rem 1.2rem; }
-    .donate-step .step-num { background: var(--accent); color: #fff; font-weight: 700; font-size: .8rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: .65rem; }
-    .donate-step p { margin: 0; font-size: .9rem; color: rgba(255,255,255,.85); }
-    .donate-step address { font-style: normal; font-size: .88rem; color: rgba(255,255,255,.85); margin-top: .4rem; line-height: 1.6; }
-    .donate-step .pdf-link { display: inline-block; margin-top: .6rem; background: var(--accent); color: #fff; text-decoration: none; font-size: .82rem; font-weight: 600; padding: .3rem .75rem; border-radius: 999px; }
-    .donate-step .pdf-link:hover { background: var(--accent-dark); }
-    .donate-unavail { font-size: .82rem; color: rgba(255,255,255,.55); margin-top: 1rem; font-style: italic; }
-    .btn-donate-hero { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 1.05rem; padding: .7rem 2rem; border-radius: 999px; text-decoration: none; transition: background .15s; }
-    .btn-donate-hero:hover { background: var(--accent-dark); }
-    .donate-cta-strip { margin-top: 2.5rem; padding: 1.75rem 2rem; background: var(--accent); border-radius: var(--radius); text-align: center; }
-    .donate-cta-strip h3 { color: #fff; font-size: 1.1rem; margin-bottom: .5rem; }
-    .donate-cta-strip p { color: rgba(255,255,255,.85); font-size: .9rem; margin-bottom: 1rem; }
-    .donate-cta-strip a.btn-donate-cta { display: inline-block; background: #fff; color: var(--accent); font-weight: 700; font-size: 1rem; padding: .6rem 2rem; border-radius: 999px; text-decoration: none; transition: background .15s; }
-    .donate-cta-strip a.btn-donate-cta:hover { background: var(--color-lightest-orange); }
-
-    /* News section */
-    .news-section { margin-top: 2.5rem; padding: 2rem; background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); }
-    .news-empty { color: var(--muted); font-size: .9rem; font-style: italic; text-align: center; padding: 1rem 0; }
-
-    /* Get Involved section */
-    .involve-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.25rem; }
-    .involve-item { background: var(--green-pale); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; font-size: .9rem; }
-    .involve-item .involve-icon { font-size: 1.4rem; margin-bottom: .4rem; }
-    .involve-item h3 { font-size: .9rem; font-weight: 700; margin-bottom: .2rem; }
-    .involve-item p { font-size: .83rem; color: var(--muted); margin: 0; }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
 <nav id="site-nav">
-  <a class="nav-brand" href="#">Good Governance Corvallis</a>
+  <a class="nav-brand" href="./">Good Governance Corvallis</a>
   <div class="nav-links">
     <a href="#measures">Learn More</a>
-    <a href="#news">Latest News</a>
-    <a href="#endorsements">Endorsements</a>
-    <a href="#get-involved">Get Involved</a>
-    <a href="#donate" class="nav-donate">DONATE</a>
+    <a href="news/">Latest News</a>
+    <a href="endorsements/">Endorsements</a>
+    <a href="donate/">Get Involved</a>
+    <a href="donate/" class="nav-donate">DONATE</a>
   </div>
 </nav>
 
@@ -248,7 +25,7 @@
   <p class="lead">Four straightforward amendments to modernize Corvallis's 1948 City Charter —
     unanimously recommended by a nonpartisan task force and unanimously referred by City Council.</p>
   <a href="#measures" class="btn">Learn About the Measures</a>
-  <a href="#donate" class="btn-donate-hero">Donate to the Campaign</a>
+  <a href="donate/" class="btn-donate-hero">Donate to the Campaign</a>
 </header>
 
 <div class="intro">
@@ -261,7 +38,7 @@
   <h2 class="section-heading" id="measures">The Four Measures</h2>
   <div class="measures" id="measures-container"></div>
 
-  <!-- Task Force — no box -->
+  <!-- Task Force -->
   <div style="margin-top:3rem; text-align:center;">
     <h2 class="section-heading">Charter Review Task Force</h2>
     <p style="font-size:.95rem; color:var(--muted); margin-bottom:0;">These seven individuals unanimously recommended all four measures after months of careful study. The full City Council unanimously referred them to voters.</p>
@@ -276,7 +53,7 @@
     </div>
   </div>
 
-  <!-- Why Vote Yes — boxed -->
+  <!-- Why Vote Yes -->
   <div style="margin-top:2.5rem; padding:2rem; background:var(--card); border:1px solid var(--border); border-radius:var(--radius);">
     <h2 class="section-heading">Why Vote Yes on All Four</h2>
     <div class="why-grid">
@@ -298,110 +75,29 @@
     </div>
   </div>
 
-  <!-- Endorsements — no box -->
-  <div id="endorsements" style="margin-top:2.5rem; text-align:center;">
+  <!-- Endorsements -->
+  <div style="margin-top:2.5rem; text-align:center;">
     <h2 class="section-heading">Endorsements</h2>
-    <div class="people-grid">
-      <div class="person-card"><div class="name">Charles Maughan</div><div class="role">Mayor</div></div>
-      <div class="person-card"><div class="name">Jan Napack</div><div class="role">Ward 1 Councilor</div></div>
-      <div class="person-card"><div class="name">Jim Moorefield</div><div class="role">Ward 3 Councilor</div></div>
-      <div class="person-card"><div class="name">Carolyn Mayers</div><div class="role">Ward 8 Councilor</div></div>
-      <div class="person-card"><div class="name">Tony Cadena</div><div class="role">Ward 9 Councilor</div></div>
-      <div class="person-card nonpartisan" style="background:#e8f5e9;border-color:#a5d6a7;"><div class="name" style="color:#2e7d32;">Pacific Green Party</div><div class="role" style="color:#388e3c;">Linn/Benton County Chapter</div></div>
-    </div>
-    <div class="add-name-wrap" id="endorse-buttons"></div>
+    <div class="people-grid" id="endorsers-grid"></div>
   </div>
 
-  <!-- Donate CTA strip after endorsements -->
+  <!-- Donate CTA -->
   <div class="donate-cta-strip">
     <h3>Support the campaign financially</h3>
-    <p>Help us reach every Corvallis voter with the case for these four common-sense updates.</p>
-    <a href="#donate" class="btn-donate-cta">DONATE BY CHECK</a>
-  </div>
-
-  <!-- Latest News -->
-  <div id="news" class="news-section">
-    <h2 class="section-heading">Latest News</h2>
-    <p class="news-empty">No news yet — check back soon or follow Good Governance Corvallis for updates.</p>
-  </div>
-
-  <!-- Get Involved -->
-  <div id="get-involved" style="margin-top:2.5rem; padding:2rem; background:var(--card); border:1px solid var(--border); border-radius:var(--radius);">
-    <h2 class="section-heading" style="text-align:center;">Get Involved</h2>
-    <p style="text-align:center; color:var(--muted); font-size:.95rem;">There are many ways to help pass these four measures.</p>
-    <div class="involve-grid">
-      <div class="involve-item">
-        <div class="involve-icon">✉️</div>
-        <h3>Write a Letter</h3>
-        <p>Submit a letter to the editor of the Gazette-Times or Corvallis Advocate in support of the measures.</p>
-      </div>
-      <div class="involve-item">
-        <div class="involve-icon">📬</div>
-        <h3>Distribute Literature</h3>
-        <p>Help us get flyers and door hangers into neighborhoods across Corvallis.</p>
-      </div>
-      <div class="involve-item">
-        <div class="involve-icon">📣</div>
-        <h3>Spread the Word</h3>
-        <p>Share this website with your social networks, neighborhood groups, and community organizations.</p>
-      </div>
-      <div class="involve-item">
-        <div class="involve-icon">🖊️</div>
-        <h3>Add Your Endorsement</h3>
-        <p>Let your name appear publicly as a supporter of good governance in Corvallis.</p>
-      </div>
-    </div>
-    <div style="text-align:center; margin-top:1.5rem;">
-      <div id="get-involved-endorse-buttons"></div>
-    </div>
-  </div>
-
-  <!-- Donate -->
-  <div id="donate" class="donate-section">
-    <h2 class="section-heading">Donate to Good Governance Corvallis</h2>
-    <p>Your contribution helps us reach every voter with the case for these four common-sense charter updates.</p>
-    <p class="donate-unavail">Note: Online donations (credit card, ActBlue, etc.) are not currently available. Donations by check only.</p>
-    <div class="donate-steps">
-      <div class="donate-step">
-        <div class="step-num">1</div>
-        <p>Download and print the <strong>contribution form</strong>.</p>
-        <a class="pdf-link" href="/donate-form.pdf" target="_blank" rel="noopener">Download Form (PDF) ↗</a>
-      </div>
-      <div class="donate-step">
-        <div class="step-num">2</div>
-        <p>Fill it out completely. <strong>Occupation and employer are required by law.</strong> Sign and date it.</p>
-      </div>
-      <div class="donate-step">
-        <div class="step-num">3</div>
-        <p>Write a check payable to:<br><strong>GOOD GOVERNANCE CORVALLIS</strong></p>
-      </div>
-      <div class="donate-step">
-        <div class="step-num">4</div>
-        <p>Mail your check and completed form using the pre-addressed return envelope, or mail directly to:</p>
-        <a class="pdf-link" href="/donate-envelope.pdf" target="_blank" rel="noopener">Download Envelope (PDF) ↗</a>
-        <address style="margin-top:.75rem;">Good Governance Corvallis<br>2834 NW Rolling Green Drive<br>Corvallis, OR 97330</address>
-      </div>
-    </div>
-    <p style="font-size:.82rem; color:rgba(255,255,255,.5); margin-top:.5rem;">Authorized and paid for by Good Governance Corvallis, A Political Action Committee (ID: 24834)</p>
+    <p>Help us reach every Corvallis voter. Donations by check or cash.</p>
+    <a href="donate/" class="btn-donate-cta">DONATE</a>
   </div>
 
 </main>
 
 <footer>
-  <!-- <a href="https://www.corvallisoregon.gov/cm/page/may-2026-election-ballot-measures" target="_blank" rel="noopener">Official Ballot Measures</a> &bull; -->
-  <!-- <a href="https://www.corvallisoregon.gov/cm/page/city-charter" target="_blank" rel="noopener">Current City Charter</a> &bull; -->
-  <!-- <a href="https://archives.corvallisoregon.gov/public/ElectronicFile.aspx?dbid=0&docid=5717604" target="_blank" rel="noopener">Task Force Report (PDF)</a> -->
-  <br>
-  <!-- <a href="https://www.corvallisoregon.gov/cm/page/corvallis-charter-amendments-frequently-asked-questions" target="_blank" rel="noopener">FAQ</a> &bull; -->
-  <a href="/bc400.pdf" target="_blank" rel="noopener">BC-400 Template</a>
-  <br><br>
-  <a href="#donate" style="display:inline-block; background:var(--accent); color:#fff; font-weight:700; padding:.45rem 1.5rem; border-radius:999px; text-decoration:none; margin-bottom:1rem;">DONATE BY CHECK</a>
-  <br>
   <span style="opacity:.65;">Paid for by Good Governance Corvallis (#24834)</span>
 </footer>
 
+<script src="endorsers.js"></script>
 <script>
-// ── Utilities ────────────────────────────────────────────────────
+renderEndorsers('endorsers-grid');
+
 const LINKLESS = new URLSearchParams(location.search).get('linkless') === 'true';
 
 function esc(s) {
@@ -413,7 +109,6 @@ function maybeStripLinks(html) {
   return html.replace(/<a\b[^>]*>(.*?)<\/a>/g, '$1');
 }
 
-// Jaccard similarity on word sets — determines if we do word or block diff
 function jaccard(a, b) {
   const ws = s => new Set(s.toLowerCase().match(/\b\w+\b/g) || []);
   const A = ws(a), B = ws(b);
@@ -422,7 +117,6 @@ function jaccard(a, b) {
   return common / (A.size + B.size - common);
 }
 
-// Word-level LCS diff
 function wordDiff(before, after) {
   const tok = s => s.match(/\S+|\s+/g) || [];
   const a = tok(before), b = tok(after);
@@ -447,8 +141,6 @@ function wordDiff(before, after) {
 function renderDiff(before, after, mode) {
   if (mode === 'before') return `<div class="diff-content">${esc(before)}</div>`;
   if (mode === 'after')  return `<div class="diff-content">${esc(after)}</div>`;
-
-  // Smart: use block diff for largely-rewritten sections
   const sim = jaccard(before, after);
   if (sim < 0.35) {
     return `
@@ -461,7 +153,6 @@ function renderDiff(before, after, mode) {
   return `<div class="diff-content">${wordDiff(before, after)}</div>`;
 }
 
-// ── Charter chapter URLs ─────────────────────────────────────────
 // const BASE = 'https://www.corvallisoregon.gov/mc/page/';
 const SEC_CH = {
   3:2,5:2,6:2, 7:3, 13:4,14:4,15:4,16:4,17:4,18:4,21:4,
@@ -478,7 +169,6 @@ function chapterUrl(sec) {
   return null; // const ch = SEC_CH[sec]; return ch ? BASE + CH_SLUG[ch] : null;
 }
 
-// ── Data ─────────────────────────────────────────────────────────
 const MEASURES = [
   {
     num:1, official:'2-143',
@@ -633,29 +323,7 @@ const MEASURES = [
   },
 ];
 
-// ── Endorse email ────────────────────────────────────────────────
-const EMAIL_TO = 'endorse@corvallischarter.info';
-
-const EMAIL_SUBJECT = 'Endorsement — Corvallis Charter Measures 2026';
-
-const EMAIL_BODY = `\
-I would like to add my, or my organization's, name as an endorser. Please find \
-attached FOUR completed BC-400 (Measure Argument) forms, one per measure, which \
-I have filled out using the template at https://corvallischarter.info/bc400.pdf`;
-
-const mailtoHref =
-  `mailto:${EMAIL_TO}` +
-  `?subject=${encodeURIComponent(EMAIL_SUBJECT)}` +
-  `&body=${encodeURIComponent(EMAIL_BODY)}`;
-
-const endorseHtml = `
-  <a class="add-name-btn primary" href="${mailtoHref}">+ Add your name</a>
-  <a class="add-name-btn secondary" href="/bc400.pdf" target="_blank" rel="noopener">BC-400</a>`;
-document.getElementById('endorse-buttons').innerHTML = endorseHtml;
-document.getElementById('get-involved-endorse-buttons').innerHTML = endorseHtml;
-
-// ── Render ───────────────────────────────────────────────────────
-function renderSectionRow(m, s, idx) {
+function renderSectionRow(m, s) {
   const key = `m${m.num}s${s.sec}`;
   const url = chapterUrl(s.sec);
   const linkHtml = url
@@ -689,7 +357,7 @@ function renderSectionRow(m, s, idx) {
 }
 
 function renderMeasure(m) {
-  const rowsHtml = m.sections.map((s,i) => renderSectionRow(m, s, i)).join('');
+  const rowsHtml = m.sections.map(s => renderSectionRow(m, s)).join('');
   return `
     <div class="measure-card" id="m${m.num}">
       <div class="measure-header" onclick="toggleCard('m${m.num}')">
@@ -717,24 +385,16 @@ function renderMeasure(m) {
 
 document.getElementById('measures-container').innerHTML = MEASURES.map(renderMeasure).join('');
 
-// ── Interaction ──────────────────────────────────────────────────
-function toggleCard(id) {
-  document.getElementById(id).classList.toggle('open');
-}
-
-function toggleRow(key) {
-  document.getElementById(key).classList.toggle('open');
-}
+function toggleCard(id) { document.getElementById(id).classList.toggle('open'); }
+function toggleRow(key) { document.getElementById(key).classList.toggle('open'); }
 
 function setView(key, mode, btn) {
-  let m_data, s_data;
+  let s_data;
   outer: for (const m of MEASURES)
     for (const s of m.sections)
-      if (`m${m.num}s${s.sec}` === key) { m_data = m; s_data = s; break outer; }
+      if (`m${m.num}s${s.sec}` === key) { s_data = s; break outer; }
   if (!s_data) return;
-
   document.getElementById(key + '-body').innerHTML = renderDiff(s_data.before, s_data.after, mode);
-
   btn.closest('.diff-view-tabs').querySelectorAll('.diff-tab').forEach(t => t.classList.remove('active'));
   btn.classList.add('active');
 }

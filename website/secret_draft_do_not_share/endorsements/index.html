@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Endorsements — Good Governance Corvallis</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+<nav id="site-nav">
+  <a class="nav-brand" href="../">Good Governance Corvallis</a>
+  <div class="nav-links">
+    <a href="../#measures">Learn More</a>
+    <a href="../news/">Latest News</a>
+    <a href="../endorsements/" aria-current="page">Endorsements</a>
+    <a href="../donate/">Get Involved</a>
+    <a href="../donate/" class="nav-donate">DONATE</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Endorsements</h1>
+  <p class="sub">Corvallis community members and organizations who support all four measures</p>
+</div>
+
+<main>
+
+  <div style="text-align:center;">
+    <div class="people-grid" id="endorsers-grid"></div>
+    <div class="add-name-wrap" id="endorse-buttons"></div>
+  </div>
+
+  <div class="donate-cta-strip">
+    <h3>Support the campaign financially</h3>
+    <p>Help us reach every Corvallis voter. Donations by check or cash.</p>
+    <a href="../donate/" class="btn-donate-cta">DONATE</a>
+  </div>
+
+</main>
+
+<footer>
+  <span style="opacity:.65;">Paid for by Good Governance Corvallis (#24834)</span>
+</footer>
+
+<script src="../endorsers.js"></script>
+<script>
+renderEndorsers('endorsers-grid');
+const EMAIL_TO = 'endorse@corvallischarter.info';
+const EMAIL_SUBJECT = 'Endorsement \u2014 Corvallis Charter Measures 2026';
+const EMAIL_BODY = `I would like to add my, or my organization's, name as an endorser. Please find attached FOUR completed BC-400 (Measure Argument) forms, one per measure, which I have filled out using the template at https://corvallischarter.info/bc400.pdf`;
+const mailtoHref = `mailto:${EMAIL_TO}?subject=${encodeURIComponent(EMAIL_SUBJECT)}&body=${encodeURIComponent(EMAIL_BODY)}`;
+document.getElementById('endorse-buttons').innerHTML = `
+  <a class="add-name-btn primary" href="${mailtoHref}">+ Add your name</a>`;
+</script>
+</body>
+</html>
