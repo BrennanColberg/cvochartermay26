@@ -7,6 +7,7 @@ const ENDORSERS = [
   { name:'Gabe Shepherd',    role:'County Commissioner' },
   { name:'Julie Manning',    role:'Former Mayor' },
   { name:'Biff Traber',      role:'Former Mayor' },
+  { name:'Penny York',       role:'Former Councilor' },
   { name:'Pacific Green Party', role:'Linn/Benton County Chapter', org:true, style:'background:#e8f5e9;border-color:#a5d6a7;', nameStyle:'color:#2e7d32;', roleStyle:'color:#388e3c;' },
 ];
 
