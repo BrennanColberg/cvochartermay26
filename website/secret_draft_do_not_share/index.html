@@ -198,7 +198,7 @@
 </header>
 
 <div class="intro">
-  <p>The <a href="https://www.corvallisoregon.gov/cm/page/city-charter">Corvallis City Charter</a> is our community's governing constitution — originally adopted in 1948, last amended in 2021.
+  <p>The <!--<a href="https://www.corvallisoregon.gov/cm/page/city-charter">-->Corvallis City Charter<!--</a>--> is our community's governing constitution — originally adopted in 1948, last amended in 2021.
     After months of careful study, the <strong>Charter Review Task Force</strong> unanimously recommended these four updates.
     The City Council voted unanimously to put them on your ballot.</p>
 </div>
@@ -260,11 +260,11 @@
 </main>
 
 <footer>
-  <a href="https://www.corvallisoregon.gov/cm/page/may-2026-election-ballot-measures" target="_blank" rel="noopener">Official Ballot Measures</a> &bull;
-  <a href="https://www.corvallisoregon.gov/cm/page/city-charter" target="_blank" rel="noopener">Current City Charter</a> &bull;
-  <a href="https://archives.corvallisoregon.gov/public/ElectronicFile.aspx?dbid=0&docid=5717604" target="_blank" rel="noopener">Task Force Report (PDF)</a>
+  <!-- <a href="https://www.corvallisoregon.gov/cm/page/may-2026-election-ballot-measures" target="_blank" rel="noopener">Official Ballot Measures</a> &bull; -->
+  <!-- <a href="https://www.corvallisoregon.gov/cm/page/city-charter" target="_blank" rel="noopener">Current City Charter</a> &bull; -->
+  <!-- <a href="https://archives.corvallisoregon.gov/public/ElectronicFile.aspx?dbid=0&docid=5717604" target="_blank" rel="noopener">Task Force Report (PDF)</a> -->
   <br>
-  <a href="https://www.corvallisoregon.gov/cm/page/corvallis-charter-amendments-frequently-asked-questions" target="_blank" rel="noopener">FAQ</a> &bull;
+  <!-- <a href="https://www.corvallisoregon.gov/cm/page/corvallis-charter-amendments-frequently-asked-questions" target="_blank" rel="noopener">FAQ</a> &bull; -->
   <a href="/bc400.pdf" target="_blank" rel="noopener">BC-400 Template</a>
   <br><br>
   <span style="opacity:.65;">Paid for by Good Governance Corvallis (#24834)</span>
@@ -272,8 +272,15 @@
 
 <script>
 // ── Utilities ────────────────────────────────────────────────────
+const LINKLESS = new URLSearchParams(location.search).get('linkless') === 'true';
+
 function esc(s) {
   return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function maybeStripLinks(html) {
+  if (!LINKLESS) return html;
+  return html.replace(/<a\b[^>]*>(.*?)<\/a>/g, '$1');
 }
 
 // Jaccard similarity on word sets — determines if we do word or block diff
@@ -325,7 +332,7 @@ function renderDiff(before, after, mode) {
 }
 
 // ── Charter chapter URLs ─────────────────────────────────────────
-const BASE = 'https://www.corvallisoregon.gov/mc/page/';
+// const BASE = 'https://www.corvallisoregon.gov/mc/page/';
 const SEC_CH = {
   3:2,5:2,6:2, 7:3, 13:4,14:4,15:4,16:4,17:4,18:4,21:4,
   '23f':5,24:5, 25:6,26:6,27:6,28:6,29:6,30:6,31:6,32:6,
@@ -338,14 +345,14 @@ const CH_SLUG = {
   9:'chapter-9-public-improvements',10:'chapter-10-miscellaneous'
 };
 function chapterUrl(sec) {
-  const ch = SEC_CH[sec]; return ch ? BASE + CH_SLUG[ch] : null;
+  return null; // const ch = SEC_CH[sec]; return ch ? BASE + CH_SLUG[ch] : null;
 }
 
 // ── Data ─────────────────────────────────────────────────────────
 const MEASURES = [
   {
     num:1, official:'2-143',
-    officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-amend-corvallis-city-charter-align-model-charter',
+    // officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-amend-corvallis-city-charter-align-model-charter',
     title:'Amending Language to Align with the Model Charter',
     question:'Shall the City of Corvallis amend its existing charter to align language with the League of Oregon Cities\u2019 model charter?',
     summary:'Updates <strong>12 sections</strong> that use outdated or unnecessarily different wording compared to the statewide model charter \u2014 without meaningfully changing what those sections do.',
@@ -402,7 +409,7 @@ const MEASURES = [
 
   {
     num:2, official:'2-144',
-    officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-remove-corvallis-city-charter-provisions-align-model-charter',
+    // officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-remove-corvallis-city-charter-provisions-align-model-charter',
     title:'Removing Outdated Provisions to Align with the Model Charter',
     question:'Shall the City of Corvallis remove provisions from its charter to align with the League of Oregon Cities\u2019 model charter?',
     summary:'Removes <strong>9 sections</strong> whose subject matter is already governed by Oregon state law, addressed elsewhere in the charter, or better handled through city ordinance. Redundant provisions can create legal conflicts \u2014 removing them is cleaner and safer.',
@@ -415,7 +422,7 @@ const MEASURES = [
         reason:`<a href="https://oregon.public.law/statutes/ors_chapter_254" target="_blank" rel="noopener">ORS Chapter 254</a> (Conduct of Elections) governs when and how city general elections are held. Specifically, <a href="https://www.oregonlegislature.gov/bills_laws/ors/ors254.html" target="_blank" rel="noopener">ORS 254.035</a> already requires city elections to coincide with the state biennial general election. The charter provision restates what state law already mandates.` },
       { sec:'27', kind:'remove', title:'Qualifications of Electors',
         before:`No person shall vote at any City election unless the person is a qualified elector of the State of Oregon and a resident of the City.`,
-        reason:`Voter eligibility is set by <a href="https://ballotpedia.org/Article_II,_Oregon_Constitution" target="_blank" rel="noopener">Oregon Constitution Article II, \u00a72</a> and implemented through <a href="https://oregon.public.law/statutes/ors_247.009" target="_blank" rel="noopener">ORS 247.009</a>, which states that a person may vote in a city election only if they are a registered elector of the city. The charter cannot define voter qualifications differently from state law, so this provision is both redundant and legally powerless.` },
+        reason:`Voter eligibility is set by Oregon Constitution Article II, \u00a72 and implemented through <a href="https://oregon.public.law/statutes/ors_247.009" target="_blank" rel="noopener">ORS 247.009</a>, which states that a person may vote in a city election only if they are a registered elector of the city. The charter cannot define voter qualifications differently from state law, so this provision is both redundant and legally powerless.` },
       { sec:'28', kind:'remove', title:'Special Elections',
         before:`The Council shall have the power to call special elections. A special election shall be called by ordinance setting forth the purpose for which such special election shall be called and the proposition(s) to be voted on the day on which such election shall be held.`,
         reason:`The authority and procedure for calling special elections is governed by <a href="https://oregon.public.law/statutes/ors_chapter_254" target="_blank" rel="noopener">ORS Chapter 254</a>. Cities already have this power under state law, and the detailed procedure for calling a special election is better suited to city ordinance (which can be updated without a ballot measure) than to the charter.` },
@@ -427,19 +434,19 @@ const MEASURES = [
         reason:`Canvassing of election results is governed by <a href="https://oregon.public.law/statutes/ors_254.565" target="_blank" rel="noopener">ORS 254.565</a>, which assigns this duty to the city elections officer (not a panel of local electors). The Benton County Elections Division conducts the canvass in practice. The charter's procedure \u2014 requiring two local electors from different parties \u2014 conflicts with how state law actually works.` },
       { sec:'32', kind:'remove', title:'Initiative and Referendum',
         before:`Initiative petitions shall be signed by a number of legal voters equal to 15 percent of the votes cast for Mayor at the last preceding municipal election. Referendum petitions shall be signed by a number of legal voters equal to 10 percent of the votes cast for Mayor at the last regular preceding municipal election.`,
-        reason:`Initiative and referendum powers are reserved to city voters directly by <a href="https://ballotpedia.org/Article_IV,_Oregon_Constitution" target="_blank" rel="noopener">Oregon Constitution Article IV, \u00a71(5)</a>. Signature thresholds for city measures are set by <a href="https://oregon.public.law/statutes/ors_250.305" target="_blank" rel="noopener">ORS 250.305</a> as a percentage of <em>registered electors</em> \u2014 a different and more current metric than "votes cast for Mayor." Keeping conflicting thresholds in the charter risks legal uncertainty about which rule applies.` },
+        reason:`Initiative and referendum powers are reserved to city voters directly by Oregon Constitution Article IV, \u00a71(5). Signature thresholds for city measures are set by <a href="https://oregon.public.law/statutes/ors_250.305" target="_blank" rel="noopener">ORS 250.305</a> as a percentage of <em>registered electors</em> \u2014 a different and more current metric than "votes cast for Mayor." Keeping conflicting thresholds in the charter risks legal uncertainty about which rule applies.` },
       { sec:'42', kind:'remove', title:'Public Improvement Contracts',
         before:`All public improvement contracts shall be subject to the limitations of State law.`,
         reason:`This section simply says city contracts must follow state law \u2014 which is already true by definition, with or without this sentence. <a href="https://oregon.public.law/statutes/ors_chapter_279c" target="_blank" rel="noopener">ORS Chapter 279C</a> (Public Contracting \u2014 Public Improvements and Related Contracts) comprehensively governs competitive bidding, prevailing wages, and all other requirements for public improvement contracts. The charter provision is pure surplusage.` },
       { sec:'48', kind:'remove', title:'Amendments',
         before:`An amendment to the Charter of the City of Corvallis, or new or supplemental Charter, may be proposed and submitted to the legal voters of the City by resolution of the Council. No amendment of the Charter shall be effective until it is approved by a majority of the votes cast thereon by the legal voters of the City. The ballot title of such amendment shall be the same as prepared and submitted with such amendment, or new or supplemental Charter, by the resolution of the Council.`,
-        reason:`The process for amending a home-rule charter is established directly by <a href="https://ballotpedia.org/Article_XI,_Oregon_Constitution" target="_blank" rel="noopener">Oregon Constitution Article XI, \u00a72</a>, which grants city voters the power to enact and amend charters. Charter amendments must go to voters regardless of what \u00a748 says. Removing this section does not change how amendments work \u2014 the constitutional requirement stands on its own.` },
+        reason:`The process for amending a home-rule charter is established directly by Oregon Constitution Article XI, \u00a72, which grants city voters the power to enact and amend charters. Charter amendments must go to voters regardless of what \u00a748 says. Removing this section does not change how amendments work \u2014 the constitutional requirement stands on its own.` },
     ],
   },
 
   {
     num:3, official:'2-145',
-    officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-amend-corvallis-city-charter-provisions-relating-exercise-powers',
+    // officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-amend-corvallis-city-charter-provisions-relating-exercise-powers',
     title:'Exercise of Powers',
     question:'Shall the City of Corvallis amend certain sections of its charter relating to the exercise of city powers?',
     summary:'Updates <strong>5 sections</strong> to clearly define three types of Council authority \u2014 legislative (ordinances), administrative (resolutions), and quasi-judicial (orders) \u2014 and sets transparent procedures for adopting each.',
@@ -468,7 +475,7 @@ const MEASURES = [
 
   {
     num:4, official:'2-146',
-    officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-amend-corvallis-charter-relating-vacancies-quorum-qualifications-office',
+    // officialUrl:'https://www.corvallisoregon.gov/cm/page/may-2026-measure-amend-corvallis-charter-relating-vacancies-quorum-qualifications-office',
     title:'Vacancies, Quorum, and Qualifications',
     question:'Shall the City of Corvallis amend its charter provisions relating to vacancies in office, quorum requirements, and qualifications for office?',
     summary:'Updates <strong>5 interrelated sections</strong> to clarify who qualifies for office, what triggers a vacancy, how quorum works when seats are empty, and how vacancies are filled \u2014 including a critical safety net for filling multiple simultaneous vacancies.',
@@ -531,7 +538,7 @@ function renderSectionRow(m, s, idx) {
     </div>` : '';
 
   const bodyHtml = s.kind === 'remove'
-    ? `<div class="removed-block">${esc(s.before)}</div><div class="remove-reason">Why removed: ${s.reason}</div>`
+    ? `<div class="removed-block">${esc(s.before)}</div><div class="remove-reason">Why removed: ${maybeStripLinks(s.reason)}</div>`
     : renderDiff(s.before, s.after, 'diff');
 
   return `
@@ -556,7 +563,7 @@ function renderMeasure(m) {
       <div class="measure-header" onclick="toggleCard('m${m.num}')">
         <div class="badge">${m.num}</div>
         <div class="measure-meta">
-          <div class="measure-number">Measure ${m.official} &bull; <a href="${m.officialUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Official city page \u2197</a></div>
+          <div class="measure-number">Measure ${m.official}${m.officialUrl ? ` &bull; <a href="${m.officialUrl}" target="_blank" rel="noopener" onclick="event.stopPropagation()">Official city page \u2197</a>` : ''}</div>
           <h3>${m.title}</h3>
           <p class="question">${m.question}</p>
         </div>
