@@ -1,8 +1,13 @@
 from reportlab.lib.pagesizes import letter
 from reportlab.lib.units import inch
 from reportlab.pdfgen import canvas
-from reportlab.lib.styles import getSampleStyleSheet
-from reportlab.platypus import Paragraph
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+
+pdfmetrics.registerFont(TTFont("Arial", "/System/Library/Fonts/Supplemental/Arial.ttf"))
+pdfmetrics.registerFont(TTFont("Arial-Bold", "/System/Library/Fonts/Supplemental/Arial Bold.ttf"))
+pdfmetrics.registerFont(TTFont("Arial-Italic", "/System/Library/Fonts/Supplemental/Arial Italic.ttf"))
+pdfmetrics.registerFont(TTFont("Arial-BoldItalic", "/System/Library/Fonts/Supplemental/Arial Bold Italic.ttf"))
 
 W, H = letter  # 612 x 792
 
@@ -22,14 +27,14 @@ def make_form(path):
     y = H - 0.75 * inch
 
     # ── Header ───────────────────────────────────────────────────────
-    c.setFont("Courier-Bold", 14)
+    c.setFont("Arial-Bold", 14)
     c.drawString(margin, y, "YES, I support Measures 2-143, 2-144, 2-145, and 2-146 that")
     y -= 0.26 * inch
     c.drawString(margin, y, "Good Governance Corvallis is working to pass.")
     y -= 0.36 * inch
 
     # ── Volunteer checkboxes ─────────────────────────────────────────
-    c.setFont("Courier", 11)
+    c.setFont("Arial", 11)
     c.drawString(margin, y, "I will help by:")
     y -= 0.25 * inch
 
@@ -51,23 +56,23 @@ def make_form(path):
 
     # ── Name-use checkbox ─────────────────────────────────────────────
     checkbox(c, margin, y - 1, 9)
-    c.setFont("Courier", 11)
+    c.setFont("Arial", 11)
     c.drawString(margin + 0.2 * inch, y, "You may include my name as a supporter in campaign materials,")
     y -= 0.22 * inch
     c.drawString(margin + 0.2 * inch, y, "advertisements, and other outreach efforts.")
     y -= 0.42 * inch
 
     # ── Contribution section ──────────────────────────────────────────
-    c.setFont("Courier", 11)
+    c.setFont("Arial", 11)
     c.drawString(margin, y, "Enclosed is my contribution of: ")
     line(c, margin + 2.4 * inch, y - 1, margin + 3.8 * inch, y - 1)
     y -= 0.2 * inch
-    c.setFont("Courier-Oblique", 10)
+    c.setFont("Arial-Italic", 10)
     c.drawString(margin, y, "Please make checks payable to GOOD GOVERNANCE CORVALLIS")
     y -= 0.32 * inch
 
     # Amount checkboxes
-    c.setFont("Courier", 11)
+    c.setFont("Arial", 11)
     amounts = ["$50", "$100", "$250", "$500", "$1,000", "Other"]
     x = margin
     for amt in amounts:
@@ -80,14 +85,14 @@ def make_form(path):
 
     # ── Contact fields ────────────────────────────────────────────────
     def field_line(label, x_start, x_end, y_pos, label2=None, x_mid=None):
-        c.setFont("Courier", 11)
+        c.setFont("Arial", 11)
         c.drawString(x_start, y_pos, label)
-        lw = c.stringWidth(label, "Courier", 11)
+        lw = c.stringWidth(label, "Arial", 11)
         x1 = x_start + lw + 2
         if label2 and x_mid:
             line(c, x1, y_pos - 1, x_mid - 0.15 * inch, y_pos - 1)
             c.drawString(x_mid, y_pos, label2)
-            lw2 = c.stringWidth(label2, "Courier", 11)
+            lw2 = c.stringWidth(label2, "Arial", 11)
             line(c, x_mid + lw2 + 2, y_pos - 1, x_end, y_pos - 1)
         else:
             line(c, x1, y_pos - 1, x_end, y_pos - 1)
@@ -96,17 +101,17 @@ def make_form(path):
     y -= 0.26 * inch
     field_line("Telephone ", margin, margin + 2.1 * inch, y, "Email ", margin + 2.2 * inch)
     # extend email line to right
-    lw = c.stringWidth("Email ", "Courier", 11)
+    lw = c.stringWidth("Email ", "Arial", 11)
     line(c, margin + 2.2 * inch + lw + 2, y - 1, right, y - 1)
     y -= 0.26 * inch
     field_line("Address ", margin, right, y)
     y -= 0.26 * inch
     field_line("City ", margin, margin + 3.0 * inch, y)
     c.drawString(margin + 3.1 * inch, y, "State ")
-    lw = c.stringWidth("State ", "Courier", 11)
+    lw = c.stringWidth("State ", "Arial", 11)
     line(c, margin + 3.1 * inch + lw + 2, y - 1, margin + 4.1 * inch, y - 1)
     c.drawString(margin + 4.2 * inch, y, "Zip ")
-    lw2 = c.stringWidth("Zip ", "Courier", 11)
+    lw2 = c.stringWidth("Zip ", "Arial", 11)
     line(c, margin + 4.2 * inch + lw2 + 2, y - 1, right, y - 1)
     y -= 0.26 * inch
     field_line("Occupation (required by law) ", margin, right, y)
@@ -117,23 +122,23 @@ def make_form(path):
     y -= 0.42 * inch
 
     # ── Thank you ─────────────────────────────────────────────────────
-    c.setFont("Courier-BoldOblique", 12)
+    c.setFont("Arial-BoldItalic", 12)
     text = "Thank you for your support of Good Governance For A Better Corvallis!"
     c.drawCentredString(W / 2, y, text)
     y -= 0.38 * inch
 
     # ── Mail to ───────────────────────────────────────────────────────
-    c.setFont("Courier-Bold", 10.5)
+    c.setFont("Arial-Bold", 10.5)
     c.drawCentredString(W / 2, y, "Mail completed form and contribution to:")
     y -= 0.22 * inch
-    c.setFont("Courier", 10.5)
+    c.setFont("Arial", 10.5)
     c.drawCentredString(W / 2, y, "Good Governance Corvallis")
     y -= 0.19 * inch
     c.drawCentredString(W / 2, y, "2834 NW Rolling Green Drive, Corvallis, OR 97330")
     y -= 0.32 * inch
 
     # ── Legal footer ──────────────────────────────────────────────────
-    c.setFont("Courier", 8)
+    c.setFont("Arial", 8)
     c.drawCentredString(W / 2, y,
         "Authorized and paid for by Good Governance Corvallis, A Political Action Committee (ID:24834)")
     y -= 0.17 * inch
