@@ -177,6 +177,15 @@ footer strong { color: #fff; }
 /* ── News ────────────────────────────────────────────────────────── */
 .news-empty { color: var(--muted); font-size: .9rem; font-style: italic; text-align: center; padding: 2rem 0; }
 
+/* ── FAQ page ────────────────────────────────────────────────────── */
+.faq-list { display: flex; flex-direction: column; gap: 1.25rem; max-width: 720px; margin: 1.5rem auto 0; }
+.faq-item { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.4rem; }
+.faq-item h3 { font-size: 1rem; font-weight: 700; margin: 0 0 .6rem; color: var(--green); }
+.faq-item p, .faq-item ul { font-size: .92rem; color: var(--text); margin: 0 0 .5rem; }
+.faq-item ul { padding-left: 1.25rem; }
+.faq-item li { margin-bottom: .25rem; }
+.faq-item *:last-child { margin-bottom: 0; }
+
 /* ── Get Involved ────────────────────────────────────────────────── */
 .involve-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.25rem; }
 .involve-item { background: var(--green-pale); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; }
