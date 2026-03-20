@@ -9,140 +9,130 @@ pdfmetrics.registerFont(TTFont("Arial-Bold", "/System/Library/Fonts/Supplemental
 pdfmetrics.registerFont(TTFont("Arial-Italic", "/System/Library/Fonts/Supplemental/Arial Italic.ttf"))
 pdfmetrics.registerFont(TTFont("Arial-BoldItalic", "/System/Library/Fonts/Supplemental/Arial Bold Italic.ttf"))
 
-W, H = letter  # 612 x 792
+W, H = letter
+BODY = 11
+GAP  = 0.27 * inch
+
+def hline(c, x1, y, x2):
+    c.setLineWidth(0.75)
+    c.line(x1, y, x2, y)
 
 def checkbox(c, x, y, size=9):
-    c.rect(x, y, size, size)
-
-def line(c, x1, y1, x2, y2, width=0.75):
-    c.setLineWidth(width)
-    c.line(x1, y1, x2, y2)
+    c.setLineWidth(0.75)
+    c.rect(x, y, size, size, stroke=1, fill=0)
 
 def make_form(path):
     c = canvas.Canvas(path, pagesize=letter)
     margin = 0.85 * inch
-    right = W - margin
-    width = right - margin
+    right  = W - margin
+    cx     = W / 2
 
     y = H - 0.75 * inch
 
     # ── Header ───────────────────────────────────────────────────────
     c.setFont("Arial-Bold", 14)
     c.drawString(margin, y, "YES, I support Measures 2-143, 2-144, 2-145, and 2-146 that")
-    y -= 0.26 * inch
+    y -= 0.27 * inch
     c.drawString(margin, y, "Good Governance Corvallis is working to pass.")
-    y -= 0.36 * inch
+    y -= 0.40 * inch
 
     # ── Volunteer checkboxes ─────────────────────────────────────────
-    c.setFont("Arial", 11)
+    c.setFont("Arial", BODY)
     c.drawString(margin, y, "I will help by:")
-    y -= 0.25 * inch
+    y -= GAP
 
-    items = [
+    for item in [
         "Writing a letter to the editor",
         "Distributing literature in my neighborhood",
         "Inviting my social network group(s) to support the campaign",
-    ]
-    for item in items:
-        checkbox(c, margin, y - 1, 9)
-        c.drawString(margin + 0.2 * inch, y, item)
-        y -= 0.22 * inch
+    ]:
+        checkbox(c, margin, y - 1)
+        c.drawString(margin + 0.20 * inch, y, item)
+        y -= GAP
 
-    # Other with line
-    checkbox(c, margin, y - 1, 9)
-    c.drawString(margin + 0.2 * inch, y, "Other ")
-    line(c, margin + 0.75 * inch, y - 1, right, y - 1)
-    y -= 0.36 * inch
+    checkbox(c, margin, y - 1)
+    c.drawString(margin + 0.20 * inch, y, "Other")
+    lw = c.stringWidth("Other", "Arial", BODY)
+    hline(c, margin + 0.20 * inch + lw + 4, y - 1, right)
+    y -= 0.38 * inch
 
     # ── Name-use checkbox ─────────────────────────────────────────────
-    checkbox(c, margin, y - 1, 9)
-    c.setFont("Arial", 11)
-    c.drawString(margin + 0.2 * inch, y, "You may include my name as a supporter in campaign materials,")
-    y -= 0.22 * inch
-    c.drawString(margin + 0.2 * inch, y, "advertisements, and other outreach efforts.")
-    y -= 0.42 * inch
+    checkbox(c, margin, y - 1)
+    c.setFont("Arial", BODY)
+    c.drawString(margin + 0.20 * inch, y, "You may include my name as a supporter in campaign materials,")
+    y -= GAP
+    c.drawString(margin + 0.20 * inch, y, "advertisements, and other outreach efforts.")
+    y -= 0.40 * inch
 
     # ── Contribution section ──────────────────────────────────────────
-    c.setFont("Arial", 11)
-    c.drawString(margin, y, "Enclosed is my contribution of: ")
-    line(c, margin + 2.4 * inch, y - 1, margin + 3.8 * inch, y - 1)
-    y -= 0.2 * inch
+    c.setFont("Arial", BODY)
+    label = "Enclosed is my contribution of:"
+    c.drawString(margin, y, label)
+    lw = c.stringWidth(label, "Arial", BODY)
+    hline(c, margin + lw + 6, y - 1, margin + lw + 6 + 1.3 * inch)
+    y -= GAP - 0.04 * inch
+
     c.setFont("Arial-Italic", 10)
     c.drawString(margin, y, "Please make checks payable to GOOD GOVERNANCE CORVALLIS")
-    y -= 0.32 * inch
+    y -= 0.34 * inch
 
     # Amount checkboxes
-    c.setFont("Arial", 11)
+    c.setFont("Arial", BODY)
     amounts = ["$50", "$100", "$250", "$500", "$1,000", "Other"]
-    x = margin
-    for amt in amounts:
-        checkbox(c, x, y - 1, 9)
+    slot = (right - margin) / len(amounts)
+    for i, amt in enumerate(amounts):
+        x = margin + i * slot
+        checkbox(c, x, y - 1)
         c.drawString(x + 0.18 * inch, y, amt)
-        x += 0.82 * inch
-    # line after "Other"
-    line(c, x - 0.08 * inch, y - 1, x + 0.45 * inch, y - 1)
-    y -= 0.42 * inch
+    last_x = margin + (len(amounts) - 1) * slot
+    lw = c.stringWidth("Other", "Arial", BODY)
+    hline(c, last_x + 0.18 * inch + lw + 4, y - 1, last_x + slot - 0.05 * inch)
+    y -= 0.40 * inch
 
     # ── Contact fields ────────────────────────────────────────────────
-    def field_line(label, x_start, x_end, y_pos, label2=None, x_mid=None):
-        c.setFont("Arial", 11)
-        c.drawString(x_start, y_pos, label)
-        lw = c.stringWidth(label, "Arial", 11)
-        x1 = x_start + lw + 2
-        if label2 and x_mid:
-            line(c, x1, y_pos - 1, x_mid - 0.15 * inch, y_pos - 1)
-            c.drawString(x_mid, y_pos, label2)
-            lw2 = c.stringWidth(label2, "Arial", 11)
-            line(c, x_mid + lw2 + 2, y_pos - 1, x_end, y_pos - 1)
-        else:
-            line(c, x1, y_pos - 1, x_end, y_pos - 1)
+    def field(label, x0, x1, yp):
+        c.setFont("Arial", BODY)
+        c.drawString(x0, yp, label)
+        lw = c.stringWidth(label, "Arial", BODY)
+        hline(c, x0 + lw + 3, yp - 1, x1)
 
-    field_line("Name ", margin, right, y)
-    y -= 0.26 * inch
-    field_line("Telephone ", margin, margin + 2.1 * inch, y, "Email ", margin + 2.2 * inch)
-    # extend email line to right
-    lw = c.stringWidth("Email ", "Arial", 11)
-    line(c, margin + 2.2 * inch + lw + 2, y - 1, right, y - 1)
-    y -= 0.26 * inch
-    field_line("Address ", margin, right, y)
-    y -= 0.26 * inch
-    field_line("City ", margin, margin + 3.0 * inch, y)
-    c.drawString(margin + 3.1 * inch, y, "State ")
-    lw = c.stringWidth("State ", "Arial", 11)
-    line(c, margin + 3.1 * inch + lw + 2, y - 1, margin + 4.1 * inch, y - 1)
-    c.drawString(margin + 4.2 * inch, y, "Zip ")
-    lw2 = c.stringWidth("Zip ", "Arial", 11)
-    line(c, margin + 4.2 * inch + lw2 + 2, y - 1, right, y - 1)
-    y -= 0.26 * inch
-    field_line("Occupation (required by law) ", margin, right, y)
-    y -= 0.26 * inch
-    field_line("Employer (required by law) ", margin, right, y)
-    y -= 0.26 * inch
-    field_line("Employer City and State (required by law) ", margin, right, y)
-    y -= 0.42 * inch
+    field("Name", margin, right, y);  y -= GAP + 0.04 * inch
+
+    tel_end = margin + 2.1 * inch
+    field("Telephone", margin, tel_end, y)
+    field("Email", tel_end + 0.18 * inch, right, y)
+    y -= GAP + 0.04 * inch
+
+    field("Address", margin, right, y);  y -= GAP + 0.04 * inch
+
+    city_end  = margin + 2.8 * inch
+    state_end = city_end + 0.75 * inch
+    field("City",  margin,                   city_end,  y)
+    field("State", city_end  + 0.12 * inch, state_end, y)
+    field("Zip",   state_end + 0.12 * inch, right,     y)
+    y -= GAP + 0.04 * inch
+
+    field("Occupation (required by law)", margin, right, y);  y -= GAP + 0.04 * inch
+    field("Employer (required by law)",   margin, right, y);  y -= GAP + 0.04 * inch
+    field("Employer City and State (required by law)", margin, right, y)
+    y -= 0.45 * inch
 
     # ── Thank you ─────────────────────────────────────────────────────
     c.setFont("Arial-BoldItalic", 12)
-    text = "Thank you for your support of Good Governance For A Better Corvallis!"
-    c.drawCentredString(W / 2, y, text)
+    c.drawCentredString(cx, y, "Thank you for your support of Good Governance For A Better Corvallis!")
     y -= 0.38 * inch
 
     # ── Mail to ───────────────────────────────────────────────────────
     c.setFont("Arial-Bold", 10.5)
-    c.drawCentredString(W / 2, y, "Mail completed form and contribution to:")
-    y -= 0.22 * inch
+    c.drawCentredString(cx, y, "Mail completed form and contribution to:")
+    y -= 0.24 * inch
     c.setFont("Arial", 10.5)
-    c.drawCentredString(W / 2, y, "Good Governance Corvallis")
-    y -= 0.19 * inch
-    c.drawCentredString(W / 2, y, "2834 NW Rolling Green Drive, Corvallis, OR 97330")
-    y -= 0.32 * inch
+    c.drawCentredString(cx, y, "Good Governance Corvallis  |  2834 NW Rolling Green Drive, Corvallis, OR 97330")
 
-    # ── Legal footer ──────────────────────────────────────────────────
+    # ── Legal — pinned to very bottom ────────────────────────────────
     c.setFont("Arial", 8)
-    c.drawCentredString(W / 2, y,
-        "Authorized and paid for by Good Governance Corvallis, A Political Action Committee (ID:24834)")
-    y -= 0.17 * inch
-    c.drawCentredString(W / 2, y, "2834 Rolling Green Drive, Corvallis, OR 97330")
+    c.drawCentredString(cx, 0.45 * inch,
+        "Authorized and paid for by Good Governance Corvallis, A Political Action Committee (#24834)")
 
     c.save()
 
