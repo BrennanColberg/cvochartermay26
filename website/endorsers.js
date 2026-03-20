@@ -1,7 +1,10 @@
 const ENDORSERS = [
   { name:'Charles Maughan',  role:'Mayor' },
   { name:'Jan Napack',       role:'Ward 1 Councilor' },
+  { name:'Briae Lewis',      role:'Ward 2 Councilor' },
   { name:'Jim Moorefield',   role:'Ward 3 Councilor' },
+  { name:'Ava Olson',        role:'Ward 4 Councilor' },
+  { name:'Charlyn Ellis',    role:'Ward 5 Councilor' },
   { name:'Carolyn Mayers',   role:'Ward 8 Councilor' },
   { name:'Tony Cadena',      role:'Ward 9 Councilor' },
   { name:'Gabe Shepherd',    role:'County Commissioner' },

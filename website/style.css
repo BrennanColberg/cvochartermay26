@@ -35,7 +35,7 @@ html { background: var(--green); }
 body { font-family: Arial, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
 
 /* ── Sticky nav ──────────────────────────────────────────────────── */
-#site-nav { position: sticky; top: 0; z-index: 100; background: var(--green); display: flex; align-items: center; justify-content: space-between; padding: .55rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.3); gap: 1rem; }
+#site-nav { position: sticky; top: 0; z-index: 100; background: var(--green); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; padding: .55rem 1.5rem; box-shadow: 0 2px 8px rgba(0,0,0,.3); gap: .5rem 1rem; }
 #site-nav .nav-brand { color: #fff; font-weight: 700; font-size: .9rem; white-space: nowrap; text-decoration: none; }
 #site-nav .nav-links { display: flex; align-items: center; gap: .15rem; flex-wrap: wrap; }
 #site-nav .nav-links a { color: var(--color-light-green); text-decoration: none; font-size: .82rem; padding: .3rem .55rem; border-radius: 4px; transition: background .15s, color .15s; white-space: nowrap; }
@@ -43,6 +43,17 @@ body { font-family: Arial, sans-serif; background: var(--bg); color: var(--text)
 #site-nav .nav-links a[aria-current="page"] { background: rgba(255,255,255,.18); color: #fff; }
 #site-nav .nav-links a.nav-donate { background: var(--accent); color: #fff; font-weight: 700; font-size: .85rem; padding: .35rem .85rem; border-radius: 999px; margin-left: .4rem; }
 #site-nav .nav-links a.nav-donate:hover { background: var(--accent-dark); }
+
+/* hamburger button — hidden on desktop */
+#nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: .3rem .4rem; color: #fff; font-size: 1.35rem; line-height: 1; }
+
+@media (max-width: 620px) {
+  #nav-toggle { display: block; }
+  #site-nav .nav-links { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 0; border-top: 1px solid rgba(255,255,255,.18); padding-top: .4rem; padding-bottom: .3rem; }
+  #site-nav.open .nav-links { display: flex; }
+  #site-nav .nav-links a { font-size: .92rem; padding: .6rem .3rem; border-radius: 4px; }
+  #site-nav .nav-links a.nav-donate { margin-left: 0; margin-top: .4rem; text-align: center; border-radius: 999px; }
+}
 [id] { scroll-margin-top: 3.2rem; }
 
 /* ── Hero (index only) ───────────────────────────────────────────── */
