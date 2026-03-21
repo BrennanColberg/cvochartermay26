@@ -1,18 +1,22 @@
 const ENDORSERS = [
-  { name:'Charles Maughan',  role:'Mayor' },
-  { name:'Jan Napack',       role:'Ward 1 Councilor' },
-  { name:'Briae Lewis',      role:'Ward 2 Councilor' },
-  { name:'Jim Moorefield',   role:'Ward 3 Councilor' },
-  { name:'Ava Olson',        role:'Ward 4 Councilor' },
-  { name:'Charlyn Ellis',    role:'Ward 5 Councilor' },
-  { name:'Carolyn Mayers',   role:'Ward 8 Councilor' },
-  { name:'Tony Cadena',      role:'Ward 9 Councilor' },
+  { name:'Democratic Party', role:'Benton County', org:true, style:'background:#e3f2fd;border-color:#90caf9;', nameStyle:'color:#1565c0;', roleStyle:'color:#1976d2;' },
+  { name:'Republican Party', role:'Benton County', org:true, style:'background:#fce4ec;border-color:#ef9a9a;', nameStyle:'color:#c62828;', roleStyle:'color:#d32f2f;' },
+  { name:'Pacific Green Party', role:'Linn/Benton County', org:true, style:'background:#e8f5e9;border-color:#a5d6a7;', nameStyle:'color:#2e7d32;', roleStyle:'color:#388e3c;' },
+  { name:'Charles Maughan',  role:'Mayor', newRow:true },
+  { name:'Jan Napack',       role:'City Councilor' },
+  { name:'Briae Lewis',      role:'City Councilor' },
+  { name:'Jim Moorefield',   role:'City Councilor' },
+  { name:'Ava Olson',        role:'City Councilor' },
+  { name:'Charlyn Ellis',    role:'City Councilor' },
+  { name:'Carolyn Mayers',   role:'City Councilor' },
+  { name:'Tony Cadena',      role:'City Councilor' },
   { name:'Gabe Shepherd',    role:'County Commissioner' },
   { name:'Julie Manning',    role:'Former Mayor' },
   { name:'Biff Traber',      role:'Former Mayor' },
   { name:'Penny York',       role:'Former Councilor' },
-  { name:'Democratic Party', role:'Benton County', org:true, newRow:true, style:'background:#e3f2fd;border-color:#90caf9;', nameStyle:'color:#1565c0;', roleStyle:'color:#1976d2;' },
-  { name:'Pacific Green Party', role:'Linn/Benton County Chapter', org:true, style:'background:#e8f5e9;border-color:#a5d6a7;', nameStyle:'color:#2e7d32;', roleStyle:'color:#388e3c;' },
+  { name:'Alexis Hammer' },
+  { name:'Brennan Colberg' },
+  { name:'Curtis Wright' },
 ];
 
 function renderEndorsers(containerId) {
@@ -22,6 +26,6 @@ function renderEndorsers(containerId) {
     ${e.newRow ? '<div style="width:100%;grid-column:1/-1;height:0;"></div>' : ''}
     <div class="person-card${e.org ? ' nonpartisan' : ''}"${e.style ? ` style="${e.style}"` : ''}>
       <div class="name"${e.nameStyle ? ` style="${e.nameStyle}"` : ''}>${e.name}</div>
-      <div class="role"${e.roleStyle ? ` style="${e.roleStyle}"` : ''}>${e.role}</div>
+      ${e.role ? `<div class="role"${e.roleStyle ? ` style="${e.roleStyle}"` : ''}>${e.role}</div>` : ''}
     </div>`).join('');
 }
