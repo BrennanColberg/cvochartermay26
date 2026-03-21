@@ -14,9 +14,9 @@ const ENDORSERS = [
   { name:'Biff Traber',      role:'Former Mayor' },
   { name:'Julie Manning',    role:'Former Mayor' },
   { name:'Penny York',       role:'Former Councilor' },
-  { name:'Alexis Hammer',    role:'Citizen' },
-  { name:'Brennan Colberg',  role:'Citizen' },
-  { name:'Curtis Wright',    role:'Citizen' },
+  { name:'Alexis Hammer',    role:'Community Member' },
+  { name:'Brennan Colberg',  role:'Community Member' },
+  { name:'Curtis Wright',    role:'Community Member' },
 ];
 
 function renderEndorsers(containerId) {
