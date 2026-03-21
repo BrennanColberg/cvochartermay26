@@ -37,6 +37,7 @@
   <div style="margin-top:2.5rem; text-align:center;">
     <h2 class="section-heading">Endorsements (so far)</h2>
     <div class="people-grid" id="endorsers-grid"></div>
+    <div class="add-name-wrap" id="endorse-buttons-home"></div>
   </div>
 
   <h2 class="section-heading" id="measures" style="margin-top:3rem; text-align:center;">The Four Measures</h2>
@@ -75,6 +76,16 @@
 <script src="endorsers.js"></script>
 <script>
 renderEndorsers('endorsers-grid');
+
+const EMAIL_TO = 'endorse@goodgovernancecorvallis.org';
+const EMAIL_SUBJECT = 'Endorsement \u2014 Corvallis Charter Measures 2026';
+const EMAIL_BODY = `I would like to add my, or my organization's, name as an endorser of the Corvallis Charter measures (2-143, 2-144, 2-145, 2-146).
+
+Name:
+Organization (if applicable):`;
+const mailtoHref = `mailto:${EMAIL_TO}?subject=${encodeURIComponent(EMAIL_SUBJECT)}&body=${encodeURIComponent(EMAIL_BODY)}`;
+document.getElementById('endorse-buttons-home').innerHTML = `
+  <a class="add-name-btn primary" href="${mailtoHref}">+ Add your name</a>`;
 
 const LINKLESS = new URLSearchParams(location.search).get('linkless') === 'true';
 

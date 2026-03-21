@@ -11,12 +11,12 @@ const ENDORSERS = [
   { name:'Carolyn Mayers',   role:'City Councilor' },
   { name:'Tony Cadena',      role:'City Councilor' },
   { name:'Gabe Shepherd',    role:'County Commissioner' },
-  { name:'Julie Manning',    role:'Former Mayor' },
   { name:'Biff Traber',      role:'Former Mayor' },
+  { name:'Julie Manning',    role:'Former Mayor' },
   { name:'Penny York',       role:'Former Councilor' },
-  { name:'Alexis Hammer' },
-  { name:'Brennan Colberg' },
-  { name:'Curtis Wright' },
+  { name:'Alexis Hammer',    role:'Citizen' },
+  { name:'Brennan Colberg',  role:'Citizen' },
+  { name:'Curtis Wright',    role:'Citizen' },
 ];
 
 function renderEndorsers(containerId) {
