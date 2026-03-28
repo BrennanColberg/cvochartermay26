@@ -4,6 +4,7 @@ const ENDORSERS = [
   { name:'Pacific Green Party', role:'Linn/Benton County', org:true, style:'background:#e8f5e9;border-color:#a5d6a7;', nameStyle:'color:#2e7d32;', roleStyle:'color:#388e3c;' },
   { name:'Corvallis Chamber of Commerce', role:'', newRow:true },
   { name:'Downtown Corvallis Organization', role:'' },
+  { name:'Our Revolution - Corvallis Allies', role:'' },
   { name:'Charles Maughan',  role:'Mayor', newRow:true },
   { name:'Tony Cadena',      role:'City Councilor' },
   { name:'Charlyn Ellis',    role:'City Councilor' },
