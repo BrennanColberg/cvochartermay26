@@ -186,6 +186,8 @@ footer strong { color: #fff; }
 .donate-cta-strip p { color: rgba(255,255,255,.85); font-size: .9rem; margin-bottom: 1rem; }
 .donate-cta-strip a.btn-donate-cta { display: inline-block; background: #fff; color: var(--accent); font-weight: 700; font-size: 1rem; padding: .6rem 2rem; border-radius: 999px; text-decoration: none; }
 .donate-cta-strip a.btn-donate-cta:hover { background: var(--color-lightest-orange); }
+.donate-cta-strip a.btn-donate-cta.green { background: var(--green); color: #fff; }
+.donate-cta-strip a.btn-donate-cta.green:hover { background: var(--green-light); }
 
 /* ── News ────────────────────────────────────────────────────────── */
 .news-empty { color: var(--muted); font-size: .9rem; font-style: italic; text-align: center; padding: 2rem 0; }
