@@ -13,6 +13,7 @@ const ENDORSERS = [
   { name:'Jim Moorefield',   role:'City Councilor' },
   { name:'Jan Napack',       role:'City Councilor' },
   { name:'Ava Olson',        role:'City Councilor' },
+  { name:'Paul Shaffer',     role:'City Councilor' },
   { name:'Pat Malone',       role:'County Commissioner' },
   { name:'Gabe Shepherd',    role:'County Commissioner' },
   { name:'Nancy Wyse',       role:'County Commissioner' },
