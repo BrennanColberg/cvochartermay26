@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Press — Good Governance Corvallis</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+
+<nav id="site-nav">
+  <a class="nav-brand" href="../">Good Governance Corvallis</a>
+  <button id="nav-toggle" aria-label="Menu" onclick="this.closest('nav').classList.toggle('open');this.textContent=this.closest('nav').classList.contains('open')?'\u00d7':'\u2630'">&#9776;</button>
+  <div class="nav-links">
+    <a href="../#measures">Learn More</a>
+    <a href="../faq/">FAQ</a>
+    <a href="../endorsements/">Endorsements</a>
+    <a href="../press/" aria-current="page">Press</a>
+    <a href="../get-involved/">Get Involved</a>
+    <a href="../donate/" class="nav-donate">DONATE</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Press</h1>
+  <p class="sub">Letters, op&#8209;eds, and coverage of the Corvallis Charter measures</p>
+</div>
+
+<main>
+  <div class="press-list">
+
+    <article class="press-item">
+      <div class="press-head" onclick="togglePress(this)">
+        <div class="press-head-text">
+          <h2>Corvallis Charter Changes Are Good Governance</h2>
+          <p class="press-meta">
+            <span class="press-byline">Tony Cadena, Corvallis City Council President</span>
+            <span class="press-sep">&middot;</span>
+            <time datetime="2026-04-14">April 14, 2026</time>
+          </p>
+        </div>
+        <span class="chevron">&#8964;</span>
+      </div>
+      <div class="press-body">
+        <p>This May, Corvallis voters have the opportunity to update, clarify, and simplify the City Charter &mdash; without changing any of the rights of the voters.</p>
+        <p>In December 2024, the City Council adopted a strategic plan which includes a commitment to &ldquo;excellence in governance.&rdquo; While not always high&#8209;profile, maintaining clear and current governing documents is a key part of that goal. A widely recognized best practice is to periodically review and update a city&rsquo;s Charter to reflect changes in state law and modern standards.</p>
+        <p>To guide this effort, the Charter Review Task Force drew on the League of Oregon Cities&rsquo; Model Charter. This approach ensures alignment with legal updates, incorporates clear and current language, and draws on the collective experience of cities across Oregon &mdash; all while, importantly, preserving all substantive rights and protections in the existing charter.</p>
+        <p>In summary:</p>
+        <ul>
+          <li><strong>Measure 2&#8209;143</strong> uses language to make it clearer and more concise</li>
+          <li><strong>Measure 2&#8209;144</strong> removes redundant provisions to avoid duplication and confusion</li>
+          <li><strong>Measure 2&#8209;145</strong> clarifies how city decisions are made and what rules apply</li>
+          <li><strong>Measure 2&#8209;146</strong> addresses gaps related to vacancies to ensure continuity of government</li>
+        </ul>
+        <p>I am voting &ldquo;YES&rdquo; on Measures 2&#8209;143, 2&#8209;144, 2&#8209;145, and 2&#8209;146, for good governance. I hope you will too!</p>
+      </div>
+    </article>
+
+    <article class="press-item">
+      <div class="press-head" onclick="togglePress(this)">
+        <div class="press-head-text">
+          <h2>Four Measures Worth a YES Vote</h2>
+          <p class="press-meta">
+            <span class="press-byline">Curtis Wright, Charter Review Task Force</span>
+            <span class="press-sep">&middot;</span>
+            <time datetime="2026-04-07">April 7, 2026</time>
+          </p>
+        </div>
+        <span class="chevron">&#8964;</span>
+      </div>
+      <div class="press-body">
+        <p>May 19 is an important date for Corvallis. Four city charter measures are on the ballot, and while none of them will dominate dinner&#8209;table conversations, all will better shape how our local government functions for years to come. They deserve careful consideration &mdash; and a YES vote.</p>
+        <p><strong>Measure 2&#8209;143</strong> updates charter language that has drifted out of alignment with statewide standards. The fix is straightforward: adopt the League of Oregon Cities&rsquo; Model Charter language, which has been successfully used by cities across Oregon. No policy changes. No power shifts. Just a cleaner, clearer document.</p>
+        <p><strong>Measure 2&#8209;144</strong> removes redundant provisions &mdash; those that duplicate state law, repeat other charter sections, or cover topics better suited for city ordinances. Reducing duplication helps prevent confusion and lowers legal risk. All substantive rights and protections remain intact.</p>
+        <p><strong>Measure 2&#8209;145</strong> clarifies how the City differentiates between ordinances, resolutions, and orders. For residents who want to understand city decisions &mdash; or challenge them &mdash; knowing these differences is important. This measure makes those distinctions clear without altering any voter rights or Council powers.</p>
+        <p><strong>Measure 2&#8209;146</strong> fills a crucial gap in our charter&rsquo;s continuity planning. Unexpected vacancies can occur. This measure guarantees that when they happen, our city government has clear, transparent, and accountable procedures to keep things moving &mdash; ensuring continuous service to residents.</p>
+        <p>The Charter Review Task Force unanimously recommended all four. The City Council unanimously referred all four to us, the voters. And we should vote YES on all four: 2&#8209;143, 2&#8209;144, 2&#8209;145, and 2&#8209;146.</p>
+      </div>
+    </article>
+
+  </div>
+
+  <div class="donate-cta-strip">
+    <h3>Yes For Good Governance And A Better Corvallis</h3>
+    <p>Help us reach every voter.</p>
+    <div style="display:flex; gap:.75rem; justify-content:center; flex-wrap:wrap;">
+      <a href="../get-involved/" class="btn-donate-cta">Get Involved</a>
+      <a href="../donate/" class="btn-donate-cta green">Donate</a>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <span style="opacity:.65;">Paid for by Good Governance Corvallis (#24834)</span>
+</footer>
+
+<script>
+function togglePress(head) {
+  const item = head.closest('.press-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.press-item.open').forEach(el => el.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+</script>
+</body>
+</html>

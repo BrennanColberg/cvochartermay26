@@ -206,6 +206,26 @@ footer strong { color: #fff; }
 .faq-item li { margin-bottom: .25rem; }
 .faq-item *:last-child { margin-bottom: 0; }
 
+/* ── Press ───────────────────────────────────────────────────────── */
+.press-list { display: flex; flex-direction: column; gap: 1rem; max-width: 760px; margin: 1.5rem auto 0; }
+.press-item { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.press-head { display: flex; align-items: center; gap: 1rem; padding: 1.1rem 1.5rem; cursor: pointer; user-select: none; background: var(--green-pale); transition: background .15s; }
+.press-head:hover { background: var(--color-light-green); }
+.press-item.open .press-head { border-bottom: 1px solid var(--border); }
+.press-head-text { flex: 1; min-width: 0; }
+.press-head h2 { font-size: 1.1rem; font-weight: 700; color: var(--text); line-height: 1.3; margin: 0 0 .3rem; }
+.press-meta { font-size: .8rem; color: var(--muted); margin: 0; }
+.press-meta .press-byline { font-weight: 600; color: var(--green); }
+.press-meta .press-sep { margin: 0 .4rem; opacity: .5; }
+.press-head .chevron { flex-shrink: 0; font-size: 1.1rem; color: var(--green-light); margin-top: .2rem; transition: transform .2s; }
+.press-item.open .press-head .chevron { transform: rotate(180deg); }
+.press-body { display: none; padding: 1.25rem 1.5rem 1.5rem; }
+.press-item.open .press-body { display: block; }
+.press-body p { font-size: .95rem; color: var(--text); margin-bottom: .85rem; }
+.press-body ul { margin: 0 0 .85rem 1.25rem; padding: 0; }
+.press-body li { font-size: .95rem; color: var(--text); margin-bottom: .35rem; }
+.press-body *:last-child { margin-bottom: 0; }
+
 /* ── Get Involved ────────────────────────────────────────────────── */
 .involve-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1.25rem; }
 .involve-item { background: var(--green-pale); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; }
