@@ -58,9 +58,14 @@ body { font-family: Arial, sans-serif; background: var(--bg); color: var(--text)
 
 /* ── Hero (index only) ───────────────────────────────────────────── */
 header { background: var(--color-autumn); color: #fff; text-align: center; padding: 3.5rem 1.5rem 3rem; overflow: hidden; }
-.eyebrow { font-size: .85rem; letter-spacing: .12em; text-transform: uppercase; opacity: .8; margin-bottom: .75rem; }
-header h1 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; max-width: 100%; }
+.eyebrow { display: inline-block; font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #fff; background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.35); padding: .4rem 1rem; border-radius: 999px; margin-bottom: 1.25rem; }
+header h1 { font-size: clamp(2.4rem, 6.5vw, 3.8rem); font-weight: 700; line-height: 1.15; margin-bottom: 1rem; max-width: 100%; }
 header h1 .measure-nums { color: #fff; white-space: nowrap; }
+header h1 .measure-sep { color: #fff; white-space: nowrap; }
+@media (max-width: 620px) {
+  header h1 .measure-nums { display: block; }
+  header h1 .measure-sep { display: none; }
+}
 .lead { max-width: 640px; margin: 0 auto 1.75rem; font-size: 1.1rem; opacity: .92; }
 .hero-buttons { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: .75rem 1rem; }
 @media (max-width: 620px) { .hero-buttons { flex-direction: column; gap: 1rem; } }
