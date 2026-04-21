@@ -197,6 +197,19 @@ footer strong { color: #fff; }
 /* ── News ────────────────────────────────────────────────────────── */
 .news-empty { color: var(--muted); font-size: .9rem; font-style: italic; text-align: center; padding: 2rem 0; }
 
+/* ── Resource banner ─────────────────────────────────────────────── */
+.resource-banner { display: flex; align-items: center; gap: 1rem; max-width: 720px; margin: 1.5rem auto 0; padding: 1rem 1.25rem; background: var(--green-pale); border: 1px solid var(--border); border-radius: var(--radius); }
+.resource-banner-icon { font-size: 1.6rem; flex-shrink: 0; }
+.resource-banner-text { flex: 1; min-width: 0; }
+.resource-banner-text strong { display: block; font-size: .95rem; color: var(--green); margin-bottom: .15rem; }
+.resource-banner-text span { font-size: .85rem; color: var(--muted); }
+.resource-banner-btn { flex-shrink: 0; background: var(--green); color: #fff; font-weight: 700; font-size: .85rem; padding: .5rem 1.2rem; border-radius: 999px; text-decoration: none; white-space: nowrap; transition: background .15s; }
+.resource-banner-btn:hover { background: var(--green-light); }
+@media (max-width: 620px) {
+  .resource-banner { flex-wrap: wrap; }
+  .resource-banner-btn { width: 100%; text-align: center; }
+}
+
 /* ── FAQ page ────────────────────────────────────────────────────── */
 .faq-list { display: flex; flex-direction: column; gap: 1.25rem; max-width: 720px; margin: 1.5rem auto 0; }
 .faq-item { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem 1.4rem; }
