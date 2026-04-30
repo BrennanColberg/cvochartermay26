@@ -17,6 +17,7 @@ const ENDORSERS = [
   { name:'Pat Malone',       role:'County Commissioner' },
   { name:'Gabe Shepherd',    role:'County Commissioner' },
   { name:'Nancy Wyse',       role:'County Commissioner' },
+  { name:'Sara Gelser Blouin', role:'State Senator' },
   { name:'Julie Manning',    role:'Former Mayor' },
   { name:'Biff Traber',      role:'Former Mayor' },
   { name:'Penny York',       role:'Former Councilor' },
