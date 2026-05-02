@@ -1,0 +1,86 @@
+import type { Metadata } from "next";
+import DonateCTA from "@/components/DonateCTA";
+
+const DESCRIPTION = "Common questions about the May 19, 2026 Corvallis charter measures.";
+
+export const metadata: Metadata = {
+  title: "FAQ",
+  description: DESCRIPTION,
+  openGraph: { title: "FAQ", description: DESCRIPTION, url: "/faq" },
+  twitter: { title: "FAQ", description: DESCRIPTION },
+};
+
+export default function FaqPage() {
+  return (
+    <>
+      <div className="page-header">
+        <h1>Frequently Asked Questions</h1>
+        <p className="sub">Common questions about the May 19, 2026 Corvallis charter measures</p>
+      </div>
+
+      <main>
+        <div className="resource-banner">
+          <div className="resource-banner-icon">📄</div>
+          <div className="resource-banner-text">
+            <strong>Ballot Measure Summary Handout</strong>
+            <span>A one-page overview of all four charter measures.</span>
+          </div>
+          <a href="/lwv-handout.pdf" target="_blank" rel="noopener" className="resource-banner-btn">View PDF &rarr;</a>
+        </div>
+
+        <div className="faq-list">
+          <div className="faq-item">
+            <h3>What is the City Charter?</h3>
+            <p>The City Charter serves as the Constitution for the City of Corvallis. It is a governing framework that defines the organization, powers, functions and essential procedures of City government. It is adopted by voters and can only be amended or revised by voters. The current version of the Charter was originally adopted in 1948 and was amended by voters most recently in 2021.</p>
+          </div>
+
+          <div className="faq-item">
+            <h3>What are the measures that will be on the May 19, 2026 ballot?</h3>
+            <p>These are the measures that will appear on the May 19, 2026 ballot for voters in the City of Corvallis.</p>
+            <ul>
+              <li><strong>Measure 2&#8209;143</strong> would amend the Corvallis City Charter to align with the Model Charter if passed.</li>
+              <li><strong>Measure 2&#8209;144</strong> would remove Corvallis City Charter provisions to align with the Model Charter if passed.</li>
+              <li><strong>Measure 2&#8209;145</strong> would amend Corvallis City Charter provisions relating to the exercise of powers if passed.</li>
+              <li><strong>Measure 2&#8209;146</strong> would amend the Corvallis City Charter relating to vacancies, quorum, qualifications for office if passed.</li>
+            </ul>
+          </div>
+
+          <div className="faq-item">
+            <h3>What would these four measures do, if passed?</h3>
+            <p>If all are passed, these four measures would amend 31 sections within the City Charter.</p>
+            <p>The measures would change the Corvallis City Charter to align more closely with the League of Oregon Cities&rsquo; Model Charter, which is offered as a model for municipal governance in Oregon. The amendments also include proposed language that is specific to Corvallis.</p>
+            <p>If the four measures are not passed, the 2021 version of the Corvallis City Charter would remain in place.</p>
+          </div>
+
+          <div className="faq-item">
+            <h3>What would happen if three of the proposed Charter amendments were passed by voters and one was not passed?</h3>
+            <p>Each measure is independent of the others. If a measure is passed by a majority of the voters only those specific charter amendments would take effect. Measures that do not pass by a majority of the voters would not be implemented. Whether a particular measure passes or does not pass does not affect any other measure.</p>
+          </div>
+
+          <div className="faq-item">
+            <h3>How did these measures get on the ballot?</h3>
+            <p>The City Council established a Charter Review Task Force in 2025, which held a series of public meetings to review the existing City Charter and look for areas that could be revised. The Task Force was composed of three City Councilors, three community members, and the Mayor. The Task Force carried out its work over an 8-month time period and issued its final report to the City Council on January 20, 2026.</p>
+            <p>The final report recommended referring a series of ballot measures to Corvallis voters to consider. The ballot measures are intended to address structural changes to bring the document into alignment with the League of Oregon Cities Model Charter and address issues of governance.</p>
+          </div>
+
+          <div className="faq-item">
+            <h3>Why did the Charter Review Task Force recommend aligning some provisions with the League of Oregon Cities Model Charter?</h3>
+            <p>The League of Oregon Cities Model Charter provides legally vetted language that has been reviewed for compliance with Oregon state law and the Oregon Constitution. Aligning portions of the Corvallis City Charter with the model charter reduces legal risk and helps ensure ongoing compliance as state laws change. At the same time, the City maintains unique provisions where needed to address Corvallis&rsquo;s special circumstances and community needs.</p>
+          </div>
+
+          <div className="faq-item">
+            <h3>Where can I read the specific text changes that are proposed for these Charter amendments?</h3>
+            <p>The specific text changes for each proposed Charter amendment are available on the <a href="/#measures">Learn More</a> page of this site, or on the{" "}
+              <a href="https://www.corvallisoregon.gov/cm/page/may-2026-election-ballot-measures" target="_blank" rel="noopener">City of Corvallis official ballot measures page</a>.
+            </p>
+            <p>For questions about voter registration, ballot return, or other election procedures, contact the Benton County Elections Office at{" "}
+              <a href="tel:5417666756">541-766-6756</a> or <a href="mailto:elections@bentoncountyor.gov">elections@bentoncountyor.gov</a>.
+            </p>
+          </div>
+        </div>
+
+        <DonateCTA style={{ marginTop: "2rem" }} />
+      </main>
+    </>
+  );
+}

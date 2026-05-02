@@ -1,0 +1,170 @@
+export type SectionKind = "amend" | "remove";
+
+export interface Section {
+  sec: string | number;
+  title: string;
+  kind: SectionKind;
+  before: string;
+  after?: string;
+  reason?: string;
+}
+
+export interface Measure {
+  num: number;
+  official: string;
+  officialUrl?: string;
+  title: string;
+  question: string;
+  summary: string;
+  sections: Section[];
+}
+
+export const MEASURES: Measure[] = [
+  {
+    num: 1, official: "2-143",
+    title: "Clearer Language. Same Local Control.",
+    question: "Shall the City of Corvallis amend its existing charter to align language with the League of Oregon Cities’ model charter?",
+    summary: "Updates outdated Charter wording to match the League of Oregon Cities’ Model Charter - the statewide standard. No change to your rights, your government’s structure, or Council power. Just clearer language that reduces confusion and legal risk.",
+    sections: [
+      { sec: "3", title: "Powers of the City", kind: "amend",
+        before: "The City shall have all the rights, powers, privileges, and immunities which the constitutions, statutes, and common law of the United States and of this State expressly or impliedly grant or allow municipalities, including those rights, powers, privileges, and immunities which a City can exercise upon specifically accepting them or upon being granted the power to exercise them by the people of the City or the legislature of the State, as fully as though this Charter expressly stated each of those rights, powers, privileges, and immunities and as though each of them had been specifically accepted by the City or granted to it by the people of the City or by the legislature of the State. The powers contained herein from previously enacted Charters shall be deemed a part of the powers of the City. The City is further empowered to assess, levy, and collect taxes of all types for any and all lawful municipal purposes.",
+        after: "The City has all powers that the constitutions, statutes, and common law of the United States and Oregon expressly or impliedly grant or allow the City, as fully as though this Charter specifically enumerated each of those powers. The City is further empowered to assess, levy, and collect taxes of all types for any and all lawful municipal purposes." },
+
+      { sec: "7", title: "Where Powers Vested", kind: "amend",
+        before: "All powers of the City shall be vested in the City Council, except as otherwise provided by law or this Charter, and the Council shall provide for the exercise thereof and for the performance of all duties and obligations imposed on the City by law.",
+        after: "Except as this Charter provides otherwise, all powers of the City shall be vested in the Council." },
+
+      { sec: "13", title: "Salaries → Compensation", kind: "amend",
+        before: "Salaries. The compensation for the services of each City officer and employee shall be whatever amount the Council fixes.",
+        after: "Compensation. The Council must authorize the compensation of City officers and employees as part of its approval of the City budget." },
+
+      { sec: "15", title: "Meetings and Rules", kind: "amend",
+        before: "The Council shall hold a regular meeting at least once each month at a time and place in the City which it designates and shall adopt rules for the government of its members and proceedings. The Mayor upon their own motion may, or at the request of three members of the Council shall, by giving lawful notice, call a special meeting of the Council for a time not earlier than 24 hours nor later than 72 hours after the notice is given. In case of an actual emergency, a meeting may be held upon such notice as is appropriate under the circumstances, with the minutes describing the nature of the emergency justifying less than 24 hours notice.",
+        after: "(a) The Council must meet at least once each month at a time and place in the City designated by its rules and may meet at other times in accordance with the rules and laws of the state of Oregon. The Mayor upon their own motion may, or at the request of three members of the Council shall, by giving lawful notice, call a special meeting of the Council for a time not earlier than 24 hours nor later than 72 hours after the notice is given. In case of an actual emergency, a meeting may be held upon such notice as is appropriate under the circumstances, with the minutes describing the nature of the emergency justifying less than 24 hours notice. (b) The Council must by resolution adopt rules to govern its meetings." },
+
+      { sec: "17", title: "Journal → Record", kind: "amend",
+        before: "Journal. The Council shall cause a journal of its proceedings to be kept. Upon the request of any of its members the ayes and nays upon any question before it shall be taken and a record of the vote entered in the journal.",
+        after: "Record. A record of Council meetings must be kept in a manner prescribed by the Council rules and the laws of the state of Oregon." },
+
+      { sec: "23f", title: "§23(f) Interference in Administration", kind: "amend",
+        before: "Neither the Mayor nor any member of the Council shall in any manner, directly or indirectly, by suggestion or otherwise, attempt to influence or coerce the Manager in the making of any appointment or removal of any officer or employee or in the purchase of supplies; or attempt to exact any promise relative to any appointment from any candidate for Manager, or discuss, directly or indirectly, with the Manager the matter of specific appointments to any City office or employment. A violation of the foregoing provisions of this section shall forfeit the office of the offender. Nothing in this section shall be construed, however, as prohibiting the Council, while in open session, from discussing with or suggesting to the Manager, fully and freely, anything pertaining to the City affairs or the interests of the City.",
+        after: "In order to protect the fundamental form of government chosen by the voters, guard the power of the council as a body, defend against corruption, ensure transparency, and preserve the separation of authority set forth in this Charter between the manager’s administrative authority and the council’s general powers, no council member may actually coerce or attempt to coerce the manager or a candidate for the office of manager in the appointment or removal of any city employee, or in administrative decisions regarding city property or contracts. A violation of this prohibition is grounds for removal from office by a majority of the council after a public hearing. This prohibition does not apply in publicly noticed meetings, including but not limited to council or committee meetings, executive sessions, and work sessions." },
+
+      { sec: "24", title: "Municipal Judge", kind: "amend",
+        before: "The Municipal Judge shall be the judicial officer of the City. The Judge shall be appointed and may be removed by the Council. The Judge shall hold within the City a court known as the Municipal Court for the City of Corvallis, Benton County, Oregon. Except on nonjudicial days, the Court shall be open for the transaction of judicial business. All area within the City and all property owned or controlled by the City shall be within the territorial jurisdiction of the Court. The Municipal Judge shall exercise original and exclusive jurisdiction of all crimes and offenses defined and made punishable by ordinances of the City and of all actions brought to recover or enforce forfeitures or penalties defined or authorized by an ordinance of the City. The Municipal Judge shall have authority to issue process for the arrest of any person accused of an offense against the ordinances of the City, to commit any such person to jail or admit a person to bail pending trial, to issue subpoenas, to compel witnesses to appear and testify in Court on the trial of any cause before the Municipal Judge, to compel obedience to such subpoenas, to issue any process necessary to carry into effect the judgments of the Court, and to punish witnesses and others for contempt of Court. Notwithstanding any other provision of this section to the contrary, the functions of the Municipal Judge and Municipal Court may be fulfilled by a State court when so appointed and designated by the Council. The City may have the duties of the Municipal Judge performed by the regular and pro-tempore judges of a State court. When not governed by ordinance or this Charter, all proceedings in the Municipal Court for the violation of a City ordinance shall be governed by the applicable general laws of the State governing justices of the peace and justice courts.",
+        after: "(a) A majority of the Council may appoint and remove a municipal judge. A municipal judge will hold court in the city at such place as the Council directs. The court will be known as the Municipal Court. (b) All proceedings of this court will conform to state laws governing justices of the peace and justice courts. (c) All areas within the city and areas outside the city as permitted by state law are within the territorial jurisdiction of the court. (d) The Municipal Court has jurisdiction over every offense created by City ordinance. The court may enforce forfeitures and other penalties created by such ordinances. The court also has jurisdiction under state law unless limited by City ordinance. (e) The municipal judge may: 1. Render judgments and impose sanctions on persons and property; 2. Order the arrest of anyone accused of an offense against the City; 3. Commit to jail or admit to bail anyone accused of a City offense; 4. Issue and compel obedience to subpoenas; 5. Compel witnesses to appear and testify and jurors to serve for trials; 6. Penalize contempt of court; 7. Issue processes necessary to enforce judgments and orders of the court; 8. Issue search warrants; and 9. Perform other judicial and quasi-judicial functions assigned by ordinance. (f) The Council may appoint and may remove municipal judges pro tem. (g) The Council may transfer some or all of the functions of the Municipal Court to an appropriate state court." },
+
+      { sec: "26", title: "Applicability of State Laws", kind: "amend",
+        before: "Except as the same may be inconsistent with the provisions of this Charter, all the laws of this State regulating and governing elections and proceedings and matters incidental or relating thereto or connected therewith shall apply to and govern elections under this Charter.",
+        after: "City elections must conform to state law except as this Charter or ordinances provide otherwise. All elections for City offices must be nonpartisan." },
+
+      { sec: "29", title: "Nominations", kind: "amend",
+        before: "Effective January 1, 1955, all elective officers of the City of Corvallis shall be elected on a nonpartisan ballot. The Council shall provide by ordinance for the nominating of elective officers by petition, which shall be the sole and exclusive method of nominating such elective officers.",
+        after: "The Council must adopt an ordinance prescribing the manner for a person to be nominated to run for mayor or a city councilor position." },
+
+      { sec: "41", title: "Special Assessments", kind: "amend",
+        before: "The procedure for levying, collecting and enforcing the payment of special assessments for public improvements or other services to be charged against real property shall be governed by ordinance.",
+        after: "The procedure for levying, collecting and enforcing the payment of special assessments for public improvements or other services to be charged against real property will be governed by ordinance." },
+
+      { sec: "43", title: "Existing Ordinances", kind: "amend",
+        before: "Existing Ordinances Continued. All ordinances of the City consistent with this Charter and in force when it takes effect shall remain in effect until amended or repealed.",
+        after: "Existing Ordinances Continuation. All ordinances of the City consistent with this Charter and in force when it takes effect shall remain in effect until amended or repealed." },
+
+      { sec: "45", title: "Repealing Clause", kind: "amend",
+        before: "All Charters and Charter amendments of the City adopted prior to the time that this Charter takes effect, except as herein otherwise provided, are hereby repealed.",
+        after: "All Charter provisions enacted before this Charter takes effect, except as herein otherwise provided, are hereby repealed." },
+    ],
+  },
+
+  {
+    num: 2, official: "2-144",
+    title: "Remove Redundancy, Not Rights.",
+    question: "Shall the City of Corvallis remove provisions from its charter to align with the League of Oregon Cities’ model charter?",
+    summary: "Removes Charter provisions that duplicate existing state law, are elsewhere in the Charter, or are better done in ordinances, without eliminating a single voter right or protection. Public meetings, initiative rights, referendum rights, and Charter amendment rules all remain fully intact. A cleaner Charter is a stronger one.",
+    sections: [
+      { sec: "18", kind: "remove", title: "Meetings to Be Public",
+        before: "All deliberations and proceedings of the Council shall be public, except as provided by State law.",
+        reason: `Covered word-for-word by <a href="https://oregon.public.law/statutes/ors_192.630" target="_blank" rel="noopener">ORS 192.630</a> (Oregon Public Meetings Law), which already requires all meetings of any city governing body to be open to the public. Oregon’s law is more comprehensive — it defines exceptions, notice requirements, executive session rules, and enforcement. The charter sentence adds nothing.` },
+      { sec: "25", kind: "remove", title: "General Elections",
+        before: "A general municipal election shall be held biennially in the City of Corvallis at the same time that the general biennial election for State and county officers is held in the State of Oregon, and at each general election the successors shall be elected for all elective offices whose terms of office expire prior to the next biennial election.",
+        reason: `<a href="https://oregon.public.law/statutes/ors_chapter_254" target="_blank" rel="noopener">ORS Chapter 254</a> (Conduct of Elections) governs when and how city general elections are held. Specifically, <a href="https://www.oregonlegislature.gov/bills_laws/ors/ors254.html" target="_blank" rel="noopener">ORS 254.035</a> already requires city elections to coincide with the state biennial general election. The charter provision restates what state law already mandates.` },
+      { sec: "27", kind: "remove", title: "Qualifications of Electors",
+        before: "No person shall vote at any City election unless the person is a qualified elector of the State of Oregon and a resident of the City.",
+        reason: `Voter eligibility is set by Oregon Constitution Article II, §2 and implemented through <a href="https://oregon.public.law/statutes/ors_247.009" target="_blank" rel="noopener">ORS 247.009</a>, which states that a person may vote in a city election only if they are a registered elector of the city. The charter cannot define voter qualifications differently from state law, so this provision is both redundant and legally powerless.` },
+      { sec: "28", kind: "remove", title: "Special Elections",
+        before: "The Council shall have the power to call special elections. A special election shall be called by ordinance setting forth the purpose for which such special election shall be called and the proposition(s) to be voted on the day on which such election shall be held.",
+        reason: `The authority and procedure for calling special elections is governed by <a href="https://oregon.public.law/statutes/ors_221.230" target="_blank" rel="noopener">ORS 221.230</a>.` },
+      { sec: "30", kind: "remove", title: "Notice of Elections",
+        before: "The City Recorder shall give notice of all general or special elections by publication thereof in the City official newspaper once a week for two successive and consecutive weeks, within 30 days next preceding such election. Such notice shall state the officers to be elected, and/or measures to be voted upon as herein provided and, in case of a special election, the place designated for holding such election and the time thereof. Any error not affecting the substantial rights of voters shall not invalidate any election.",
+        reason: `Election notice is governed by <a href="https://oregon.public.law/statutes/ors_254.095" target="_blank" rel="noopener">ORS 254.095</a>, which requires the city elections officer to file statements of offices, candidates, and measures with the county clerk no later than 61 days before the election. The county then handles public notice under state law. The charter’s “official newspaper” requirement is outdated and more restrictive than state law requires.` },
+      { sec: "31", kind: "remove", title: "Canvass of Election Results",
+        before: "To canvass the results, the City Recorder shall call to the Recorder’s assistance two qualified electors of the City, not of the same political party, and they three shall then canvass the returns of the election. A written statement of the canvass shall be made and signed by the canvassers, or a majority of them, and filed with the City Recorder. Such writing must contain a statement of the whole number of the votes cast at such election and the number given for any person for any office and the name of the persons elected and to what office and also the number of votes for or against any measure submitted to the people.",
+        reason: `Canvassing of election results is governed by <a href="https://oregon.public.law/statutes/ors_254.565" target="_blank" rel="noopener">ORS 254.565</a>, which assigns this duty to the city elections officer (not a panel of local electors). The Benton County Elections Division conducts the canvass in practice. The charter’s procedure — requiring two local electors from different parties — conflicts with how state law actually works.` },
+      { sec: "32", kind: "remove", title: "Initiative and Referendum",
+        before: "Initiative petitions shall be signed by a number of legal voters equal to 15 percent of the votes cast for Mayor at the last preceding municipal election. Referendum petitions shall be signed by a number of legal voters equal to 10 percent of the votes cast for Mayor at the last regular preceding municipal election.",
+        reason: "Requirements and thresholds are determined in State Law. The Corvallis Municipal Code sets requirements within State Law and is up-to-date; Requirements set in the Charter are not current. Best practice is to use the Municipal Code to stay current." },
+      { sec: "42", kind: "remove", title: "Public Improvement Contracts",
+        before: "All public improvement contracts shall be subject to the limitations of State law.",
+        reason: `This section simply says city contracts must follow state law — which is already true by definition, with or without this sentence. <a href="https://oregon.public.law/statutes/ors_chapter_279c" target="_blank" rel="noopener">ORS Chapter 279C</a> (Public Contracting — Public Improvements and Related Contracts) comprehensively governs competitive bidding, prevailing wages, and all other requirements for public improvement contracts. The Charter provision is redundant.` },
+      { sec: "48", kind: "remove", title: "Amendments",
+        before: "An amendment to the Charter of the City of Corvallis, or new or supplemental Charter, may be proposed and submitted to the legal voters of the City by resolution of the Council. No amendment of the Charter shall be effective until it is approved by a majority of the votes cast thereon by the legal voters of the City. The ballot title of such amendment shall be the same as prepared and submitted with such amendment, or new or supplemental Charter, by the resolution of the Council.",
+        reason: "The process for amending a home-rule charter is established directly by Oregon Constitution Article XI, §2, which grants city voters the power to enact and amend charters. Charter amendments must go to voters regardless of what §48 says. Removing this section does not change how amendments work — the constitutional requirement stands on its own." },
+    ],
+  },
+
+  {
+    num: 3, official: "2-145",
+    title: "Clear Rules for How City Decisions Are Made.",
+    question: "Shall the City of Corvallis amend certain sections of its charter relating to the exercise of city powers?",
+    summary: "Defines when and how ordinances, resolutions, and orders are used. Clears up language that causes confusion and improves transparency and public access to city decisions. Does not expand Council authority or reduce voter initiative or referendum rights.",
+    sections: [
+      { sec: "5", title: "Construction of the Charter", kind: "amend",
+        before: "The Charter shall be liberally construed to the end that the City may have all powers necessary or convenient for the conduct of its municipal affairs, including all powers that cities may assume pursuant to the laws and to the municipal home-rule provisions of the constitution of the State of Oregon.",
+        after: "The Charter will be liberally construed so that the City may exercise fully all powers possible under this Charter and under United States and Oregon law. The specific mention of particular powers in the Charter shall not be construed as limiting in any way the general power granted in this Section. This Charter’s interpretation shall be examined in its entirety. In this Charter no mention of a particular power, right, privilege, or immunity shall be construed to be exclusive or to restrict the scope of the powers, rights, privileges, or immunities which the City would have if the particular power was not mentioned." },
+
+      { sec: "6", title: "Exercise of Powers", kind: "amend",
+        before: "All rights, powers, privileges, and immunities of the City shall be exercised in the manner prescribed in this Charter, or, if the manner be not prescribed in this Charter, then in the manner provided by ordinance or resolution of the Council or the laws of the State of Oregon.",
+        after: "All rights, powers, privileges, and immunities of the City shall be exercised in the manner prescribed in this Charter, or, if the manner be not prescribed in this Charter, then in the manner provided by ordinance or resolution of the Council or the laws of the State of Oregon.\n\nDistribution. The Oregon Constitution reserves initiative and referendum powers as to all municipal legislation to City voters. This Charter vests all other City powers in the Council except as the Charter otherwise provides. The Council has legislative, administrative, and quasi-judicial authority. The Council exercises legislative authority by ordinance, administrative authority by resolution, and quasi-judicial authority by order. The Council may not delegate its authority to adopt ordinances." },
+
+      { sec: "35", title: "Enacting Clause → Legislative Authority (Ordinances)", kind: "amend",
+        before: `The enacting clause of all ordinances hereafter enacted by the Council shall be: "The City of Corvallis ordains as follows:"`,
+        after: `(a) General. The Council will exercise its legislative authority by adopting ordinances. The enacting clause for all ordinances must state "The City of Corvallis ordains as follows:"\n\n(b) Ordinance Adoption.\n  1. Except as authorized by subsection (2), adoption of an ordinance requires approval by a majority of the Council at two meetings.\n  2. The Council may adopt an ordinance at a single meeting by the unanimous approval of at least a quorum of the Council, provided the proposed ordinance is available in writing to the public at least one week before the meeting.\n  3. Any substantive amendment to a proposed ordinance must be read aloud or made available in writing to the public before the Council adopts the ordinance at that meeting.\n  4. After the adoption of an ordinance, the vote of each member must be entered into the Council minutes.\n  5. After adoption of an ordinance, the City Recorder must endorse it with the date of adoption and the Recorder’s name and title.` },
+
+      { sec: "36", title: "Ordinance Passage → Administrative Authority (Resolutions)", kind: "amend",
+        before: "The procedure for passing ordinances shall be such as the Council by ordinance determines. Upon passage, the Recorder shall endorse it with the date of its passage and the Recorder’s name and title of office, and within three days thereafter the Mayor shall sign it with the date, the Mayor’s name, and the title of the office, unless the Mayor vetoes or does not return such ordinance as provided in Section 22.",
+        after: "(a) General. The Council will normally exercise its administrative authority by approving resolutions. The approving clause for resolutions may state \"The City of Corvallis resolves as follows:\"\n\n(b) Resolution Approval.\n  1. Approval of a resolution or any other Council administrative decision requires approval by the Council at one meeting.\n  2. Any substantive amendment to a resolution must be read aloud or made available in writing to the public before the Council adopts the resolution at that meeting.\n  3. After approval of a resolution or other administrative decision, the vote of each member must be entered into the Council minutes.\n  4. After approval of a resolution, the City Recorder must endorse it with the date of approval and the Recorder’s name and title.\n\n(c) Effective Date. Resolutions and other administrative decisions take effect on the date of approval or on a later day provided in the resolution." },
+
+      { sec: "37", title: "Ordinance Effect Date → Quasi-Judicial Authority (Orders)", kind: "amend",
+        before: "An ordinance enacted by the Council shall take effect on the tenth day after its enactment. When the Council deems it advisable, however, an ordinance may provide a later time for it to take effect, and, in case of an emergency, it may take effect immediately.",
+        after: "(a) General. The Council will normally exercise its quasi-judicial authority by approving orders. The approving clause for orders may state \"The City of Corvallis orders as follows:\"\n\n(b) Order Approval.\n  1. Approval of an order or any other Council quasi-judicial decision requires approval by the Council at one meeting.\n  2. Any substantive amendment to an order must be read aloud or made available in writing to the public at the meeting before the Council adopts the order.\n  3. After approval of an order or other Council quasi-judicial decision, the vote of each member must be entered in the Council minutes.\n  4. After approval of an order, the City Recorder must endorse it with the date of approval and the Recorder’s name and title.\n\n(c) Effective Date. Orders and other quasi-judicial decisions take effect on the date of final approval, or on a later day provided in the order." },
+    ],
+  },
+
+  {
+    num: 4, official: "2-146",
+    title: "Stability and Accountability When It Matters Most.",
+    question: "Shall the City of Corvallis amend its charter provisions relating to vacancies in office, quorum requirements, and qualifications for office?",
+    summary: "Ensures government can continue to function during unexpected vacancies, absences, or even disasters - with public hearings, timelines, and fairness requirements built in. Protects against paralysis while preserving ward representation and conflict-of-interest safeguards.",
+    sections: [
+      { sec: "14", title: "Qualifications for Office", kind: "amend",
+        before: "Qualifications. No person is eligible to fill an elective office of the City unless the person is a qualified elector of the City and unless the person has resided in the City one year immediately preceding any election at which the person is a candidate.\n\nConflicts of interest. Conflicts of interest are prohibited. All officers of the City are subject to the strictures, limitations and penalties of all applicable laws.",
+        after: "(a) The Mayor and each Councilor must be a qualified elector under state law and reside within the city for at least one year immediately before election or appointment to office.\n(b) No person may be a candidate at a single election for more than one City office.\n(c) Neither the Mayor nor a Councilor may be employed by the City.\n(d) The Council is the final judge of the election and qualifications of its members." },
+
+      { sec: "16", title: "Quorum", kind: "amend",
+        before: "A majority of the members of the Council shall constitute a quorum for it to do business, but a smaller number may meet and compel the attendance of absent members in a manner provided by ordinance.",
+        after: "Except as specifically addressed here and in Section 34, a majority of the Council members is a quorum to conduct business. In the event of an absence, a smaller number may meet and compel attendance of absent members as prescribed by Council rules. In the event of a vacancy due to resignation or other events, the quorum is reduced accordingly solely for the purpose to make necessary appointment(s) to reach the required quorum as outlined in Section 34." },
+
+      { sec: "21", title: "Vote Required", kind: "amend",
+        before: "Except as this Charter otherwise provides, the concurrence of a majority of the members of the Council present at a Council meeting shall be necessary to decide any question before the Council.",
+        after: "The express approval of a majority of a quorum of the Council is necessary for any Council decision, except when this Charter provides otherwise. The voting requirement to fill Council member vacancies, if there is less than a majority of council members remaining, is separate from the quorum requirement required to conduct all remaining City business unless otherwise stated." },
+
+      { sec: "33", title: "What Creates a Vacancy", kind: "amend",
+        before: "An office shall be deemed vacant upon the incumbent’s death, incompetence, conviction of a felony, resignation or absence from the City for 30 days without the consent of the Council in case of the Mayor or Councilor; upon the incumbent’s ceasing to possess the qualifications necessary for the office; or upon the failure of the person elected or appointed to an office to qualify therefor within three days after the time for the term of office to commence; and in case of the Mayor or a Councilor, upon absence from meetings of the Council for 60 days without the consent of the Council.",
+        after: "The mayor or a council office becomes vacant:\n\na) Upon the incumbent’s:\n  1) Death;\n  2) Adjudicated incompetence; or\n  3) Recall from the office.\n\nb) Upon declaration by the Council after the incumbent’s:\n  1) Failure to qualify for the office within 10 days of the time the term of office is to begin;\n  2) Absence from the city for 30 consecutive days without Council consent;\n  3) Absence from all meetings of the full Council within a 60-day period without Council consent;\n  4) Absence from greater than one-quarter of all meetings of the full Council within a calendar year, calculated based only on those meetings during which the incumbent was in office;\n  5) Ceasing to reside in the city;\n  6) Ceasing to be a qualified elector under state law;\n  7) Ceasing to possess the qualifications necessary for the office;\n  8) Conviction of a misdemeanor or felony crime; or\n  9) Resignation from the office.\n\nFor purposes of this section, “meetings of the full Council” means regular Council meetings and Council work sessions." },
+
+      { sec: "34", title: "Filling Vacancies", kind: "amend",
+        before: "A mayor or councilor vacancy shall be filled by appointment by a majority of the remaining Council members. The appointee’s term of office runs from appointment until expiration of the term of office of the last person elected to that office. If a disability prevents a Council member from attending Council meetings or a member is absent from the city, a majority of the Council may appoint a councilor pro tem.",
+        after: "Notwithstanding the quorum requirement set forth in Section 16, if at any time Council membership is reduced to less than five, the remaining members may, by majority action, appoint additional members to raise the membership to five. As little as a single Council member may constitute a majority for purposes of filling vacant Council seat(s) if all other Council seats are vacant, and the Mayor may vote and constitute a majority for purposes of filling vacant Council seats if all Council seats are vacant.\n\na) The City Council must fill vacant positions on the City Council by appointment. Any ordinance establishing a process to fill vacant City Council positions must:\n  1. Fill any vacant position no later than 60 days after the vacancy is declared.\n  2. Invite nominations from the ward with the vacant position.\n  3. Interview nominees and hold a public hearing prior to the Council voting to make any appointment.\n\nb) If there is a vacancy in the office of Mayor which occurs 120 or more days prior to the first day of the new term, the vacancy must be filled by a City-wide special election within 60 days when possible, or at the next scheduled State election date thereafter. Should a vacancy occur leaving fewer than 120 days remaining in the term, the candidate who receives the most votes for that office in the regular election will assume office immediately upon validation of the vote." },
+    ],
+  },
+];
